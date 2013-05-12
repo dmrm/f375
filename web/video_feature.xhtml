@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Oatmeal, sir!</title>
+        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    </h:head>
+    <h:body style="background: black">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"/>
+        <script src="resources/bootstrap/js/bootstrap.js"/>        
+        <div class="navbar navbar-static-top navbar-inverse">
+            <div class="navbar-inner">
+                <a  class="brand"  href="#"><img src="resources/imgs/taxi.png"/></a>
+                <ul class="nav">
+                    <li><h:link outcome="index.xhtml">Login</h:link></li>
+                    <li><h:link outcome="anonymous_request.xhtml">Anonymous request</h:link></li>
+                    <li class="active"><h:link outcome="video_feature.xhtml">Video</h:link></li>
+                </ul>
+            </div>
+            <iframe width="1280" height="720" src="http://www.youtube.com/embed/6dQako8PlA0" frameborder="0"></iframe>
+        </div>       
+    </h:body>
+</html>
+
