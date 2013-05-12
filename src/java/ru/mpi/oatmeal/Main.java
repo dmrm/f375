@@ -10,4 +10,8 @@ package ru.mpi.oatmeal;
  */
 public class Main {
     
+    public void test (){
+        //TEST
+    }
+    
 }
