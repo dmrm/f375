@@ -10,7 +10,6 @@
     <h:body>
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"/>
         <script src="resources/bootstrap/js/bootstrap.js"/>
-        <script src="resources/js/dropdown.js"/>
         
         <div class="navbar navbar-static-top navbar-inverse">
             <div class="navbar-inner">
@@ -23,11 +22,11 @@
             </div>
         </div>
         <br/>
-        <form class="form-horizontal" action="" method="post">
+        <form class="form-horizontal" action="" method="get">
             <div class="control-group">
                 <h:outputLabel class="control-label" for="handler" value="Choose handler: "/> 
                 <div class="controls">
-                    <h:selectOneListbox id="handler" >
+                    <h:selectOneListbox id="handler" style="" value="1">
                         <f:selectItem itemLabel="Police detective" itemValue="1"/>
                         <f:selectItem itemLabel="Private eye" itemValue="2"/>
                     </h:selectOneListbox>
