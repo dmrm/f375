@@ -1,39 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>#{personMB.person}</title>    
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <ui:define name="tempTitle">#{personMB.person}</ui:define>   
+       
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li class="active"><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('OUSER')}">Request</h:link></li>
+            <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">Registration</h:link></li>
+            <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">Users</h:link></li>
+            <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('PRIVATE_EYE')}">Requests</h:link></li>
+            <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('POLICEMAN')}">Affairs</h:link></li>
+        </ul>
+        <h:form>
+            <ul class="nav pull-right">
+                <li><h:commandLink action="#{personMB.logout()}">Logout(#{request.remoteUser})</h:commandLink></li>
+            </ul>
+        </h:form>
+    </ui:define>
         
-    </h:head>
-    <h:body>
-        <h:outputStylesheet library="bootstrap/css/" name="bootstrap.min.css"/>
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"/>
-        <script src="/resources/bootstrap/js/bootstrap.js"/>
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"/>
-        <script src="/resources/bootstrap/js/bootstrap.js"/>        
-        <div class="navbar navbar-static-top navbar-inverse">
-            <div class="navbar-inner">
-                <a  class="brand"  href="#"><img src="/resources/imgs/oatmeal.png"/></a>
-                <ul class="nav">
-                    <li class="active"><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
-                    <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('OUSER')}">Request</h:link></li>
-                    <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">Registration</h:link></li>
-                    <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">Users</h:link></li>
-                    <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('PRIVATE_EYE')}">Requests</h:link></li>
-                    <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('POLICEMAN')}">Affairs</h:link></li>
-                </ul>
-                <h:form>
-                    <ul class="nav pull-right">
-                        <li><h:commandLink action="#{personMB.logout()}">Logout(#{request.remoteUser})</h:commandLink></li>
-                    </ul>
-                </h:form>
-            </div>            
-        </div> 
+    <ui:define name="tempBody">
         <img src="/resources/imgs/avatar.jpg"/><h3>#{personMB.person}</h3>
         <h:panelGroup layout="block" rendered="#{request.isUserInRole('PRIVATE_EYE')}">
             <div>
@@ -49,5 +37,5 @@ and open the template in the editor.
         <h:panelGroup layout="block" rendered="#{request.isUserInRole('REGISTRAR')}">
             
         </h:panelGroup> 
-    </h:body>
-</html>
+    </ui:define>
+</ui:composition>

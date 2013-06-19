@@ -1,25 +1,19 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Oatmeal, sir!</title>
-        <h:outputStylesheet library="bootstrap/css/" name="bootstrap.min.css"/>
-    </h:head>
-    <h:body>
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"/>
-        <script src="/resources/bootstrap/js/bootstrap.js"/>
-        
-        <div class="navbar navbar-static-top navbar-inverse">
-            <div class="navbar-inner">
-                <a  class="brand"  href="#"><img src="/resources/imgs/oatmeal.png"/></a>
-                <ul class="nav">
-                    <li class="active"><h:link outcome="login.xhtml">Login</h:link></li>
-                    <li><h:link outcome="anonymous_request.xhtml">Anonymous request</h:link></li>
-                    <li><h:link outcome="video_feature.xhtml">Video</h:link></li>
-                </ul>
-            </div>
-        </div>
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">    
+    
+    <ui:define name="tempTitle">Oatmeal, sir!</ui:define>
+    
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li class="active"><h:link outcome="login.xhtml">Login</h:link></li>
+            <li><h:link outcome="anonymous_request.xhtml">Anonymous request</h:link></li>
+            <li><h:link outcome="video_feature.xhtml">Video</h:link></li>
+        </ul>
+    </ui:define>
+    
+    <ui:define name="tempBody">
         <br/>
         <form class="form-horizontal" action="j_security_check">
             <div class="control-group">
@@ -40,6 +34,6 @@
                 </div>
             </div>
         </form>
-    </h:body>
-</html>
-
+    </ui:define>
+    
+</ui:composition>
