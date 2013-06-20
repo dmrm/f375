@@ -39,13 +39,32 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Secured content</web-resource-name>
-            <url-pattern>/p/*</url-pattern>
+            <url-pattern>/p/person.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>REGISTRAR</role-name>
             <role-name>DETECTIVE</role-name>
             <role-name>PRIVATE_EYE</role-name>
             <role-name>POLICEMAN</role-name>
+            <role-name>OUSER</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secured content</web-resource-name>
+            <url-pattern>/p/affair.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>DETECTIVE</role-name>
+            <role-name>PRIVATE_EYE</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secured content</web-resource-name>
+            <url-pattern>/p/request.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
             <role-name>OUSER</role-name>
         </auth-constraint>
     </security-constraint>
@@ -68,4 +87,12 @@
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/login.xhtml</location>
     </error-page>
+    <error-page>
+        <exception-type>java.io.FileNotFoundException</exception-type>
+        <location>/404.html</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page> 
 </web-app>
