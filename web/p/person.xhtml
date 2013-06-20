@@ -14,11 +14,6 @@
             <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('PRIVATE_EYE')}">Requests</h:link></li>
             <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('POLICEMAN')}">Affairs</h:link></li>
         </ul>
-        <h:form>
-            <ul class="nav pull-right">
-                <li><h:commandLink action="#{personMB.logout()}">Logout(#{request.remoteUser})</h:commandLink></li>
-            </ul>
-        </h:form>
     </ui:define>
         
     <ui:define name="tempBody">

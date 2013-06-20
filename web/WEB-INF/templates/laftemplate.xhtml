@@ -19,7 +19,12 @@ and open the template in the editor.
         <div class="navbar navbar-static-top navbar-inverse">
             <div class="navbar-inner">
                 <ui:insert name="tempLogo"><a  class="brand"  href="#"><img src="#{resource['imgs:oatmeal.png']}"/></a></ui:insert>
-                <ui:insert name="tempNav"/>
+                <ui:insert name="tempNav"/>                
+                <h:form rendered="#{not empty request.remoteUser}">
+                    <ul class="nav pull-right">
+                        <li><h:commandLink action="#{personMB.logout()}">Logout(#{request.remoteUser})</h:commandLink></li>
+                    </ul>
+                </h:form>
             </div>            
         </div> 
         <ui:insert name="tempBody"/>
