@@ -19,9 +19,16 @@
     <ui:define name="tempBody">
         <img src="/resources/imgs/avatar.jpg"/><h3>#{personMB.person}</h3>
         <h:panelGroup layout="block" rendered="#{request.isUserInRole('PRIVATE_EYE')}">
-            <div>
-                <legend>Affairs</legend>                
-            </div>
+            <!--<div class="container">-->
+                <div class="row">
+                    <div class="span7">
+                        <legend>Affairs</legend>                
+                    </div>
+                    <div class="span4">
+                        <legend>Messages</legend>
+                    </div>
+                </div>
+            <!--</div>-->
         </h:panelGroup> 
         <h:panelGroup layout="block" rendered="#{request.isUserInRole('OUSER')}">
             
