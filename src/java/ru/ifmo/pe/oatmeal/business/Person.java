@@ -21,6 +21,7 @@ public class Person {
     private UserDAO userDAO;
     
     public String getUserName(){
-        return userDAO.find(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName()).getName();
+//        return userDAO.find(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName()).getName();
+        return "Some name";
     }    
 }
