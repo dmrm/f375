@@ -1,7 +1,8 @@
 <ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core">
     
     <ui:define name="tempTitle">Registration</ui:define>
     
@@ -19,30 +20,41 @@
             <div class="control-group">
                 <label class="control-label" for="name">Name</label>
                 <div class="controls">
-                    <h:inputText id="name"/>
+                    <h:inputText id="name" value="#{registerMB.name}"/>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="login">Login</label>
                 <div class="controls">
-                    <h:inputText id="login"/>
+                    <h:inputText id="login" value="#{registerMB.login}"/>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="password">Password</label>
                 <div class="controls">
-                    <h:inputSecret id="password"/>
+                    <h:inputSecret id="password" value="#{registerMB.password}"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="role">Role</label>
+                <div class="controls">
+                    <h:selectOneMenu value="#{registerMB.role}">
+                        <f:selectItem itemValue="OUSER" itemLabel="User"/>
+                        <f:selectItem itemValue="DETECTIVE" itemLabel="Detective"/>
+                        <f:selectItem itemValue="PRIVATE_EYE" itemLabel="Private eye"/>
+                        <f:selectItem itemValue="REGISTRAR" itemLabel="Registrar"/>
+                    </h:selectOneMenu>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="photo">Photo</label>
                 <div class="controls">
-                    
+
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <h:commandButton class="btn" type="submit" value="Send"/>
+                    <h:commandButton class="btn" type="submit" value="Send" action="#{registerMB.createUser()}"/>
                 </div>
             </div>
         </h:form>

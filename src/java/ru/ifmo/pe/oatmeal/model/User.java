@@ -28,9 +28,15 @@ public class User implements Serializable{
     @Id
     @Column(unique=true, nullable=false)
     private String login;
-          
+    
     @Column(nullable=false)
     private String password;
+    
+    @Column(nullable=false)
+    private String photo;
+          
+    @Column(nullable=false)
+    private String name;
     
     @ElementCollection(targetClass=Group.class)
     @CollectionTable(name="USER_GROUPS", 
