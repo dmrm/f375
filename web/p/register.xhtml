@@ -1,0 +1,51 @@
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:define name="tempTitle">Registration</ui:define>
+    
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li class="active"><h:link outcome="register.xhtml">Registration</h:link></li>
+            <li><h:link outcome="users.xhtml">Users</h:link></li>
+        </ul>
+    </ui:define>
+    
+    <ui:define name="tempBody">
+        <br/>
+        <h:form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="name">Name</label>
+                <div class="controls">
+                    <h:inputText id="name"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="login">Login</label>
+                <div class="controls">
+                    <h:inputText id="login"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+                <div class="controls">
+                    <h:inputSecret id="password"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="photo">Photo</label>
+                <div class="controls">
+                    
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <h:commandButton class="btn" type="submit" value="Send"/>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+    
+</ui:composition>

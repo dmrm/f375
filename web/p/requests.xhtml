@@ -1,39 +1,60 @@
 <ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     
-       <ui:define name="tempBody">
-           <div style="margin-top: 40px" class="container-fluid">
-                <table class="table table-condensed table-hover">
-                    <thead>
-                        <tr>
-                            <th class="span2">User</th>
-                            <th class="span1">Type</th>
-                            <th class="span5">Request</th>
-                            <th class="span2">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!--Generate rows-->
-                        <tr>
-                            <td>User</td>
-                            <td>Type</td>
-                            <td>Request</td>
-                            <td>
-                                <span class="btn-group">
-                                    <button class="btn btn-success">
-                                        Accept
-                                    </button>
-                                    <button class="btn btn-danger">
-                                        Decline
-                                    </button>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <ui:define name="tempTitle">Request</ui:define>
+    
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li class="active"><h:link outcome="requests.xhtml">
+                    Requests
+                    <span style="padding: 0px 2px; background: orange; color: white; border: 0px" class="decor_block">
+                        <b>
+                            4
+                        </b>
+                    </span>
+                </h:link>
+            </li>
+        </ul>
+    </ui:define>
+    
+    <ui:define name="tempBody">
+        <div style="margin-top: 40px" class="container-fluid">
+            <div class="row-fluid"> 
+               <div class="span10 offset1 decor_block">
+                    <table class="table table-condensed table-hover">
+                         <thead>
+                             <tr>
+                                 <th class="span2">User</th>
+                                 <th class="span1">Type</th>
+                                 <th class="span5">Request</th>
+                                 <th class="span2">Action</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <!--Generate rows-->
+                             <tr>
+                                 <td>User</td>
+                                 <td>Type</td>
+                                 <td>Request</td>
+                                 <td>
+                                     <span class="btn-group">
+                                         <button class="btn btn-primary">
+                                             Accept
+                                         </button>
+                                         <button class="btn">
+                                             Decline
+                                         </button>
+                                     </span>
+                                 </td>
+                             </tr>
+                         </tbody>
+                    </table>
+               </div>
             </div>
+         </div>
     </ui:define>
     
 </ui:composition>

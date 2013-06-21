@@ -8,36 +8,33 @@
     <ui:define name="tempNav">
         <ul class="nav">
             <li class="active"><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
-            <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('OUSER')}">
+            <li><h:link outcome="request.xhtml" rendered="#{request.isUserInRole('OUSER')}">
                     Request
-                </h:link></li>
-            <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
+                </h:link>
+            </li>
+            <li><h:link outcome="register.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
                     Registration
-                </h:link></li>
-            <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
+                </h:link>
+            </li>
+            <li><h:link outcome="users.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
                     Users
-                </h:link></li>
-            <li><h:link outcome="/p/requests.xhtml" rendered="#{request.isUserInRole('PRIVATE_EYE')}">
+                </h:link>
+            </li>
+            <li><h:link outcome="requests.xhtml" rendered="#{request.isUserInRole('PRIVATE_EYE')}">
                     Requests
                     <span style="padding: 0px 2px; background: orange; color: white; border: 0px" class="decor_block">
                         <b>
                             4
                         </b>
-                    </span></h:link></li>
-            <li><h:link outcome="/anonymous_request.xhtml" rendered="#{request.isUserInRole('POLICEMAN')}">
-                    Affairs
-                </h:link></li>
+                    </span>
+                </h:link>
+            </li>
         </ul>
     </ui:define>
         
     <ui:define name="tempBody">        
-        <h:panelGroup layout="block" rendered="#{request.isUserInRole('PRIVATE_EYE')}">
-            <h:outputStylesheet name="css/oatmealstyles.css"/>
-            <style>
-                body{
-                    background-color: rgb(245, 245, 245);
-                }
-            </style>
+        <h:panelGroup layout="block" rendered="#{request.isUserInRole('PRIVATE_EYE')}">      
+            
             <div class="container-fluid" style="margin: 40px 0px">
                 <div class="row-fluid">
                     <div class="span6 offset1">
@@ -88,9 +85,6 @@
             </div>
         </h:panelGroup> 
         <h:panelGroup layout="block" rendered="#{request.isUserInRole('OUSER')}">
-            
-        </h:panelGroup> 
-        <h:panelGroup layout="block" rendered="#{request.isUserInRole('POLICEMAN')}">
             
         </h:panelGroup> 
         <h:panelGroup layout="block" rendered="#{request.isUserInRole('REGISTRAR')}">

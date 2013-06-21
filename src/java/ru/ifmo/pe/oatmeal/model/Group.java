@@ -9,5 +9,5 @@ package ru.ifmo.pe.oatmeal.model;
  * @author D
  */
 public enum Group {
-    REGISTRAR, DETECTIVE, PRIVATE_EYE, POLICEMAN, OUSER
+    REGISTRAR, DETECTIVE, PRIVATE_EYE, OUSER
 }

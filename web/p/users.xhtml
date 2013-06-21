@@ -1,0 +1,42 @@
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:define name="tempTitle">Users</ui:define>
+    
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li><h:link outcome="register.xhtml">
+                    Register
+                </h:link>
+            </li>
+            <li class="active"><h:link outcome="users.xhtml">
+                    Users
+                </h:link>
+            </li>
+        </ul>
+    </ui:define>
+    
+    <ui:define name="tempBody">
+        <div style="margin-top: 40px" class="container-fluid">
+            <div class="row-fluid"> 
+               <div class="span8 offset2 decor_block">
+                    <table class="table table-condensed table-hover">
+                         <tbody>
+                             <!--Generate rows-->
+                             <tr>
+                                 <td class="span2">Photo</td>
+                                 <td class="span2">Name</td>
+                                 <td class="span2">login</td>
+                                 <td class="span2">password</td>
+                             </tr>
+                         </tbody>
+                    </table>
+               </div>
+            </div>
+         </div>
+    </ui:define>
+    
+</ui:composition>

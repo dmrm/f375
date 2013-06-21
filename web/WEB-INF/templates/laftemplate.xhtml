@@ -9,7 +9,8 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title> <ui:insert name="tempTitle">Template</ui:insert></title> 
-        <h:outputStylesheet library="bootstrap/css/" name="bootstrap.min.css"/>        
+        <h:outputStylesheet library="bootstrap/css/" name="bootstrap.min.css"/>   
+        <h:outputStylesheet name="css/oatmealstyles.css"/>
     </h:head>
     <h:body>
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"/>
@@ -23,6 +24,9 @@ and open the template in the editor.
                     <style>
                         .navbar .nav > li > a{ 
                             padding: 12px 15px 10px;
+                        }
+                        body{
+                            background-color: rgb(245, 245, 245);
                         }
                     </style>
                 </ui:insert>

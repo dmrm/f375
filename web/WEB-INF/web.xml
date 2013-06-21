@@ -54,7 +54,6 @@
             <role-name>REGISTRAR</role-name>
             <role-name>DETECTIVE</role-name>
             <role-name>PRIVATE_EYE</role-name>
-            <role-name>POLICEMAN</role-name>
             <role-name>OUSER</role-name>
         </auth-constraint>
     </security-constraint>
@@ -64,7 +63,6 @@
             <url-pattern>/p/requests.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>DETECTIVE</role-name>
             <role-name>PRIVATE_EYE</role-name>
         </auth-constraint>
     </security-constraint>
@@ -76,6 +74,33 @@
         <auth-constraint>
             <role-name>DETECTIVE</role-name>
             <role-name>PRIVATE_EYE</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secured content</web-resource-name>
+            <url-pattern>/p/register.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>REGISTRAR</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secured content</web-resource-name>
+            <url-pattern>/p/request.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>OUSER</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secured content</web-resource-name>
+            <url-pattern>/p/users.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>REGISTRAR</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -94,9 +119,6 @@
          <role-name>REGISTRAR</role-name>
     </security-role>
      <security-role>
-        <role-name>POLICEMAN</role-name>
-    </security-role>
-     <security-role>
         <role-name>DETECTIVE</role-name>
     </security-role>
      <security-role>
@@ -112,6 +134,10 @@
     </error-page>
     <error-page>
         <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page> 
+    <error-page>
+        <error-code>403</error-code>
         <location>/404.html</location>
     </error-page> 
 </web-app>

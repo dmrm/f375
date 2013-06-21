@@ -39,7 +39,7 @@ public class LoggedRequestsFilter implements Filter {
         HttpSession session = req.getSession(false);
         String url = req.getRequestURI();
         
-        if((session != null || req.getRemoteUser() != null) && 
+        if((req.getRemoteUser() != null) && 
                 (url.contains("login.xhtml") || url.contains("video_feature.xhtml") || 
                 url.contains("loginerr.xhtml") || url.contains("anonymous_request.xhtml"))){
             res.sendRedirect(req.getContextPath() + "/p/person.xhtml");
