@@ -18,7 +18,14 @@ and open the template in the editor.
         <script src="/resources/bootstrap/js/bootstrap.js"/>        
         <div class="navbar navbar-static-top navbar-inverse">
             <div class="navbar-inner">
-                <ui:insert name="tempLogo"><a  class="brand"  href="#"><img src="#{resource['imgs:oatmeal.png']}"/></a></ui:insert>
+                <ui:insert name="tempLogo">
+                    <a class="brand"  href="#"><img src="#{resource['imgs:oatmeal.png']}"/></a>
+                    <style>
+                        .navbar .nav > li > a{ 
+                            padding: 12px 15px 10px;
+                        }
+                    </style>
+                </ui:insert>
                 <ui:insert name="tempNav"/>                
                 <h:form rendered="#{not empty request.remoteUser}">
                     <ul class="nav pull-right">

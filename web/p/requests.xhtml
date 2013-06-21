@@ -1,0 +1,39 @@
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+       <ui:define name="tempBody">
+           <div style="margin-top: 40px" class="container-fluid">
+                <table class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th class="span2">User</th>
+                            <th class="span1">Type</th>
+                            <th class="span5">Request</th>
+                            <th class="span2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Generate rows-->
+                        <tr>
+                            <td>User</td>
+                            <td>Type</td>
+                            <td>Request</td>
+                            <td>
+                                <span class="btn-group">
+                                    <button class="btn btn-success">
+                                        Accept
+                                    </button>
+                                    <button class="btn btn-danger">
+                                        Decline
+                                    </button>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </ui:define>
+    
+</ui:composition>
