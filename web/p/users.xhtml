@@ -24,15 +24,20 @@
             <div class="row-fluid"> 
                <div class="span8 offset2 decor_block">
                     <table class="table table-condensed table-hover">
-                         <tbody>
-                             <!--Generate rows-->
-                             <tr>
-                                 <td class="span2">Photo</td>
-                                 <td class="span2">Name</td>
-                                 <td class="span2">login</td>
-                                 <td class="span2">password</td>
-                             </tr>
-                         </tbody>
+                        <thead>
+                            <th>Name</th>
+                            <th>Login</th>
+                            <th>Password</th>
+                        </thead>
+                        <tbody>
+                            <ui:repeat value="#{usersMB.users}" var="user">
+                               <tr>
+                                   <td class="span2">#{user.name}</td>
+                                   <td class="span2">#{user.login}</td>
+                                   <td class="span2">#{user.password}</td>
+                               </tr>
+                            </ui:repeat>
+                        </tbody>
                     </table>
                </div>
             </div>

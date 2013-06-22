@@ -4,6 +4,7 @@
  */
 package ru.ifmo.pe.oatmeal.business;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
@@ -30,6 +31,10 @@ public class Person {
 
     public String getPhoto() {
         return userDAO.find(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName()).getPhoto();
+    }
+
+    public List<User> getUsers() {
+        return userDAO.getAllUsers();
     }
     
 }

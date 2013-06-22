@@ -4,9 +4,12 @@
  */
 package ru.ifmo.pe.oatmeal.daos;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import ru.ifmo.pe.oatmeal.model.Group;
 import ru.ifmo.pe.oatmeal.model.User;
 
 /**
@@ -42,6 +45,11 @@ public class UserDAO {
     
     public User find(String login){
         return em.find(User.class, login);
+    }
+    
+    public List<User> getAllUsers(){
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
+        return query.getResultList();
     }
        
 }
