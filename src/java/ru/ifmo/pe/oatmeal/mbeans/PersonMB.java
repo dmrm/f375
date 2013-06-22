@@ -25,6 +25,10 @@ public class PersonMB {
     public String getPerson(){
         return person.getUserName();
     }
+    
+    public String getPhoto(){
+        return person.getPhoto();
+    }
        
     public void logout() throws IOException{
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();

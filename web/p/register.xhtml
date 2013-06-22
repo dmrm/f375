@@ -2,7 +2,8 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:t="http://myfaces.apache.org/tomahawk">
     
     <ui:define name="tempTitle">Registration</ui:define>
     
@@ -16,7 +17,7 @@
     
     <ui:define name="tempBody">
         <br/>
-        <h:form class="form-horizontal">
+        <h:form id="regForm" class="form-horizontal" enctype="multipart/form-data">
             <div class="control-group">
                 <label class="control-label" for="name">Name</label>
                 <div class="controls">
@@ -49,12 +50,23 @@
             <div class="control-group">
                 <label class="control-label" for="photo">Photo</label>
                 <div class="controls">
-
+                    <div class="input-append">
+                        <t:inputFileUpload id="file" value="#{registerMB.file}" style="display: none"/>                        
+                        <div id="photo" class="input-append">
+                           <input id="photoCover" class="input-large" type="text"/>
+                           <a class="btn" onclick="$('input[id=regForm\\:file]').click();">Browse</a>
+                        </div>
+                        <script type="text/javascript">
+                            $('input[id=regForm\\:file]').change(function() {
+                               $('#photoCover').val($(this).val());
+                            });
+                        </script>
+                    </div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <h:commandButton class="btn" type="submit" value="Send" action="#{registerMB.createUser()}"/>
+                    <h:commandButton class="btn" type="submit" value="Send" action="#{registerMB.registerUser()}"/>                
                 </div>
             </div>
         </h:form>

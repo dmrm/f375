@@ -7,8 +7,8 @@ package ru.ifmo.pe.oatmeal.business;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import ru.ifmo.pe.oatmeal.daos.UserDAO;
+import ru.ifmo.pe.oatmeal.model.User;
 
 /**
  *
@@ -21,7 +21,15 @@ public class Person {
     private UserDAO userDAO;
     
     public String getUserName(){
-//        return userDAO.find(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName()).getName();
-        return "Some name";
-    }    
+        return userDAO.find(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName()).getName();
+    }
+    
+    public void saveUser(User user){
+        userDAO.save(user);
+    }
+
+    public String getPhoto() {
+        return userDAO.find(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName()).getPhoto();
+    }
+    
 }

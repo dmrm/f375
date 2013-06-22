@@ -45,6 +45,18 @@ public class User implements Serializable{
     @Enumerated(EnumType.STRING)
     @Column(name="user_group", nullable=false)
     private List<Group> user_groups;
+    
+    public User(){
+        
+    }
+    
+    public User(String name, String login, String password, String path, List<Group> groups){
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.photo = path;
+        this.user_groups = groups;
+    }
 
     public String getLogin() {
         return login;
@@ -68,6 +80,22 @@ public class User implements Serializable{
 
     public void setUser_groups(List<Group> user_groups) {
         this.user_groups = user_groups;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
  
 }

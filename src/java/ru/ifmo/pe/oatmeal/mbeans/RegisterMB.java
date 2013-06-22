@@ -4,10 +4,19 @@
  */
 package ru.ifmo.pe.oatmeal.mbeans;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import org.apache.myfaces.custom.fileupload.UploadedFile;
+import ru.ifmo.pe.oatmeal.business.Person;
 import ru.ifmo.pe.oatmeal.model.Group;
+import ru.ifmo.pe.oatmeal.model.User;
 
 /**
  *
@@ -16,11 +25,18 @@ import ru.ifmo.pe.oatmeal.model.Group;
 @ManagedBean
 public class RegisterMB {
     
+    @EJB
+    private Person person;
+    
+    private static final String photoPath = "files/users_p/";
+    private static final String refPath = "/users_p/";
+    
     private String name;
     private String login;
     private String password;
     private String role;
     private String photo;
+    private UploadedFile file;
 
     public String getName() {
         return name;
@@ -61,10 +77,47 @@ public class RegisterMB {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+   
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+        
+    public void registerUser() throws IOException{
+        String userName = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName(); 
+        String fileName = file.getName();
+        byte[] byteImg = file.getBytes();
+        photo = saveFile(fileName, byteImg);
+        List<Group> roleList = new ArrayList<Group>();
+        roleList.add(defineRole(role));
+        person.saveUser(new User(name, login, password, photo, roleList));
+       // return "register.xhtml?register=success";
+    }
     
-    public String createUser(){
-        System.out.println(name + " " + login + " " + password);
-        return "register.xhtml";
+    private String saveFile(String fileName, byte[] byteImg) throws IOException{
+        photo = login + "_" + fileName;
+        File f = new File(photoPath);
+        f.mkdirs();
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(photoPath + photo));
+        bos.write(byteImg);
+        bos.flush();
+        bos.close();
+        return refPath + photo;
+    }
+    
+    private Group defineRole(String roleString){
+        if(roleString.equals("DETECTIVE")){
+            return Group.DETECTIVE;
+        } else if(roleString.equals("PRIVATE_EYE")){
+            return Group.PRIVATE_EYE;
+        } else if(roleString.equals("REGISTRAR")){
+            return Group.REGISTRAR;
+        } else {
+            return Group.OUSER;
+        }
     }
     
 }
