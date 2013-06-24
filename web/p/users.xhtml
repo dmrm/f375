@@ -28,13 +28,19 @@
                             <th>Name</th>
                             <th>Login</th>
                             <th>Password</th>
+                            <th>Groups</th>
                         </thead>
                         <tbody>
                             <ui:repeat value="#{usersMB.users}" var="user">
                                <tr>
-                                   <td class="span2">#{user.name}</td>
-                                   <td class="span2">#{user.login}</td>
-                                   <td class="span2">#{user.password}</td>
+                                    <td class="span2">#{user.name}</td>
+                                    <td class="span2">#{user.login}</td>
+                                    <td class="span2">#{user.password}</td>
+                                    <td class="span2">
+                                        <ui:repeat value="#{user.user_groups}" var="group">
+                                             #{group}<br/>
+                                        </ui:repeat>
+                                    </td>
                                </tr>
                             </ui:repeat>
                         </tbody>

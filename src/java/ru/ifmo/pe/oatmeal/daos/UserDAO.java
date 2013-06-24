@@ -24,24 +24,23 @@ public class UserDAO {
     
     public void save(User user){
         em.persist(user);
-    }
-    
-    public void update(User user){
-        em.merge(user);
-    }
-    
-    public void remove(String login){
-        User user = find(login);
-        if(user != null){
-            em.remove(user);
-        }
-    }
-    
-    public void remove(User user){
-        if (user != null && user.getLogin()!=null && em.contains(user)) {
-            em.remove(user);
-        }
-    }
+    }    
+//    public void update(User user){
+//        em.merge(user);
+//    }
+//    
+//    public void remove(String login){
+//        User user = find(login);
+//        if(user != null){
+//            em.remove(user);
+//        }
+//    }
+//    
+//    public void remove(User user){
+//        if (user != null && user.getLogin()!=null && em.contains(user)) {
+//            em.remove(user);
+//        }
+//    }
     
     public User find(String login){
         return em.find(User.class, login);

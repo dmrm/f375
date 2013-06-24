@@ -53,29 +53,32 @@
                                     <h3 style="margin: 0px 10px; font-weight: 100">Affairs</h3>
                                 </div>
                                 <div class="span2">
-                                    <button class="btn btn-primary pull-right" style="vertical-align: middle">Add affair</button>
+                                    <h:form>
+                                        <h:commandButton class="btn btn-primary pull-right" action="#{personMB.createAffair()}" value="Add affair"/>
+                                    </h:form>
                                 </div>                                
                             </div>
-                            <legend></legend>     
+                            <legend></legend>
+                            <style>
+                                .row-fluid [class*="span1"]:nth-child(12n+1) {
+                                    margin-left: 0;                                             
+                                }
+                            </style>
                             <div>
-                                <!--affairs here-->
+                                <div class="container-fluid">
+                                    <div class="row-fluid">   
+                                        <ui:repeat value="#{personMB.affairs}" var="affair">                                            
+                                            <div class="span1">  
+                                                <h:link outcome="affair.xhtml?id=#{affair.id}">                                                                              
+                                                    <h:graphicImage name="/imgs/folder.png"/>   
+                                                    <span style="left: 50%; top: 50%">##{affair.id}</span>
+                                                </h:link>
+                                            </div>                                                
+                                        </ui:repeat>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <br/>
-<!--                        <div class="row-fluid decor_block">
-                            <div class ="row-fluid">
-                                <div class="span9">
-                                    <h3 style="margin: 0px 10px; font-weight: 100">Users</h3>
-                                </div>
-                                <div class="span3">
-                                    <button class="btn btn-primary pull-right">Add user</button>
-                                </div>                                
-                            </div>
-                            <legend></legend> 
-                            <div>
-                                users here
-                            </div>
-                        </div>-->
                     </div>
                     <div class="span3 offset1 decor_block">
                         <h3 style="margin: 0px 10px; font-weight: 100">Messages</h3>

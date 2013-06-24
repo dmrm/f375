@@ -12,6 +12,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -38,7 +39,7 @@ public class User implements Serializable{
     @Column(nullable=false)
     private String name;
     
-    @ElementCollection(targetClass=Group.class)
+    @ElementCollection(targetClass=Group.class, fetch=FetchType.EAGER)
     @CollectionTable(name="USER_GROUPS", 
                      joinColumns= @JoinColumn(name="login", nullable=false),
                      uniqueConstraints= {@UniqueConstraint(columnNames={"login", "user_group"})})

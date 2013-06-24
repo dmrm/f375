@@ -31,6 +31,7 @@ public class LoggedRequestsFilter implements Filter {
     public LoggedRequestsFilter() {
     }        
     
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
@@ -47,9 +48,11 @@ public class LoggedRequestsFilter implements Filter {
             chain.doFilter(request, response);
         }        
     }
+    @Override
     public void destroy() {    
         this.filterConfig = null;
     }
+    @Override
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
     }
