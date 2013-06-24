@@ -5,7 +5,7 @@
     background-color: rgb(255, 255, 255);
 }
 
-#popup-container{
+.popup-container{
     position: fixed;
     left: 0;
     top: 0;
@@ -16,7 +16,7 @@
     display: none;
 }
 
-#popup-block{
+.popup-block{
     z-index: 9999;
     margin-top: 20%;
 }

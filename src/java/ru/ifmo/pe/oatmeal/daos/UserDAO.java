@@ -4,10 +4,12 @@
  */
 package ru.ifmo.pe.oatmeal.daos;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import ru.ifmo.pe.oatmeal.model.Group;
 import ru.ifmo.pe.oatmeal.model.User;
@@ -49,6 +51,22 @@ public class UserDAO {
     public List<User> getAllUsers(){
         TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
         return query.getResultList();
+    }
+    
+    public List<String> getAllUsersInDetectiveRoles(long affairId, String login){
+        Query query = em.createNativeQuery("SELECT DISTINCT(u.login) FROM \n" +
+                                           "userstable u, user_groups g \n" +
+                                           "WHERE g.login = u.login \n" +
+                                           "AND (g.user_group = :role1 " +
+                                           "OR g.user_group = :role2) " +
+                                           "AND u.login != :login " +
+                                           "AND u.login NOT IN (SELECT au.user_login FROM affairusers au " +
+                                           "WHERE affair_id = :affairId)");
+        return query.setParameter("role1", Group.PRIVATE_EYE.name())
+                .setParameter("role2", Group.DETECTIVE.name())
+                .setParameter("affairId", affairId)
+                .setParameter("login", login)
+                .getResultList();
     }
        
 }

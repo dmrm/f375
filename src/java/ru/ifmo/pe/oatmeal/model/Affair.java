@@ -4,6 +4,7 @@
  */
 package ru.ifmo.pe.oatmeal.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +17,7 @@ import javax.persistence.ManyToOne;
  * @author D
  */
 @Entity
-public class Affair {
+public class Affair implements Serializable{
     
     @Id @GeneratedValue
     private long id;

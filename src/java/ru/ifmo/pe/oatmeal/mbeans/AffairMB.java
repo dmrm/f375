@@ -11,7 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import ru.ifmo.pe.oatmeal.business.Affair;
+import ru.ifmo.pe.oatmeal.model.AffairUsers;
 import ru.ifmo.pe.oatmeal.model.Evidence;
+import ru.ifmo.pe.oatmeal.model.User;
 
 /**
  *
@@ -21,7 +23,7 @@ import ru.ifmo.pe.oatmeal.model.Evidence;
 public class AffairMB {
     
     @EJB
-    private Affair affairBusiness;
+    private Affair affairBusiness;    
     private ru.ifmo.pe.oatmeal.model.Affair affair;
     
     private long id;
@@ -52,6 +54,16 @@ public class AffairMB {
         return affairBusiness.getAffairEvidences(id);
     }
     
+    public List<User> getUsers(){
+        return affairBusiness.getUsersList(id);
+    }
     
+    public List<User> getResponsibleUsers(){
+        return affairBusiness.getAllResponsibleUsers(id);
+    }
+    
+    public void attachUser(String login){
+        affairBusiness.addUser(id, login);
+    }
     
 }

@@ -15,20 +15,20 @@ import javax.persistence.ManyToOne;
  * @author D
  */
 @Entity
-public class Evidence implements Serializable{
+public class AffairUsers implements Serializable{
     
     @Id @GeneratedValue
-    private long id;
+    private int id;
     @ManyToOne
     private Affair affair;
-    private String description;
-    private String eviPath;
+    @ManyToOne
+    private User user;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -40,20 +40,12 @@ public class Evidence implements Serializable{
         this.affair = affair;
     }
 
-    public String getDescription() {
-        return description;
+    public User getUser() {
+        return user;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getEviPath() {
-        return eviPath;
-    }
-
-    public void setEviPath(String eviPath) {
-        this.eviPath = eviPath;
+    public void setUser(User user) {
+        this.user = user;
     }
     
 }

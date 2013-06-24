@@ -47,7 +47,7 @@
                                     <h3 style="margin: 0px 10px; font-weight: 100">Evidences</h3>
                                 </div>
                                 <div class="span2">
-                                    <button class="btn btn-primary pull-right" onclick="document.getElementById('popup-container').style.display = 'block'">Add</button>
+                                    <button class="btn btn-primary pull-right" onclick="document.getElementById('eviContainer').style.display = 'block'">Add</button>
                                 </div>                                
                             </div>
                             <legend></legend>     
@@ -64,12 +64,14 @@
                                     <h3 style="margin: 0px 10px; font-weight: 100">Users</h3>
                                 </div>
                                 <div class="span3">
-                                    <button class="btn btn-primary pull-right">Add</button>
+                                    <button onclick="getElementById('usrContainer').style.display = 'block';" class="btn btn-primary pull-right">Add</button>
                                 </div>                                
                             </div>
                             <legend></legend> 
                             <div>
-                                <!--users here-->
+                                <ui:repeat value="#{affairMB.users}" var="user">
+                                    #{user.name}<br/>
+                                </ui:repeat>
                             </div>
                         </div>
                     </div>
@@ -93,11 +95,11 @@
                     </div>
                 </div>
             </div> 
-        <div id="popup-container">
+        <div id="eviContainer" class="popup-container">
              <!--onclick="document.getElementById('popup-container').style.display = 'none'"-->
             <div class="container-fluid" id="choose-evi">                
                 <div class="row-fluid">
-                    <div id="popup-block" class="span6 offset3 decor_block">                        
+                    <div id="eviBlock" class="span6 offset3 popup-block decor_block">                        
                         <h3 style="margin: 0px 10px; font-weight: 100">Load evidence</h3>
                         <legend></legend>                        
                             <h:form id="eviForm" class="form-horizontal" enctype="multipart/form-data">   
@@ -126,7 +128,7 @@
                                             <div class="controls">
                                                 <div class="btn-group">
                                                     <h:commandButton class="btn btn-primary" action="#{evidenceMB.loadEvi(affairMB.id)}" value="Add"/>
-                                                    <h:commandButton class="btn" type="reset" onclick="document.getElementById('popup-container').style.display = 'none'" value="Cancel"/>
+                                                    <h:commandButton class="btn" type="reset" onclick="document.getElementById('eviContainer').style.display = 'none'" value="Cancel"/>
                                                 </div>
                                             </div>
                                         </div>                                        
@@ -136,6 +138,31 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>    
+        <div id="usrContainer" class="popup-container">
+            <div class="container-fluid" id="choose-evi">                
+                <div class="row-fluid">
+                    <div id="usrBlock" class="span6 offset3 popup-block decor_block">                        
+                        <h3 style="margin: 0px 10px; font-weight: 100">Select users</h3>
+                        <legend></legend>
+                        <h:form>
+                            <div class="row">
+                                <div class="span10 offset1">
+                                    <ui:repeat value="#{affairMB.responsibleUsers}" var="user">
+                                        <h:commandLink action="#{affairMB.attachUser(user.login)}">
+                                            <div class="span2" style="text-align: center">
+                                                <h:graphicImage value="#{user.photo}"/>
+                                                #{user.name}
+                                            </div>
+                                        </h:commandLink>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <button class="btn span2 offset1" style="margin-bottom: 10px" onclick="getElementById('usrContainer').style.display = 'none';">Cancel</button>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>
