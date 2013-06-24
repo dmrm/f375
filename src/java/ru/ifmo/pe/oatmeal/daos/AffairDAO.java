@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import ru.ifmo.pe.oatmeal.model.Affair;
+import ru.ifmo.pe.oatmeal.model.User;
 
 /**
  *
@@ -29,13 +30,14 @@ public class AffairDAO {
         return em.find(Affair.class, id);
     }
     
-    public List<Affair> findAllByUser(String login){
-        TypedQuery<Affair> query = em.createQuery("SELECT a FROM Affair a WHERE a.owner = '" + login + "'", Affair.class);
-        return query.getResultList();
+    public List<Affair> findAllByUser(User login){
+        TypedQuery<Affair> query = em.createQuery("SELECT a FROM Affair a WHERE a.owner = :owner", Affair.class);
+        return query.setParameter("owner", login).getResultList();
     }
     
-    public Affair affairsByIdAndUser(String login, long affairId){
-        return em.createQuery("SELECT a FROM Affair a WHERE a.id = " + affairId + " AND " + "a.owner = '" + login + "'", Affair.class).getSingleResult();
+    public Affair affairByIdAndUser(User login, long affairId){
+        TypedQuery<Affair> query = em.createQuery("SELECT a FROM Affair a WHERE a.id = :affairId AND a.owner = :owner", Affair.class);
+        return query.setParameter("affairId", affairId).setParameter("owner", login).getSingleResult();
     }
     
 }

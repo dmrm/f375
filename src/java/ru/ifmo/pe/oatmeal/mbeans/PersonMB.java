@@ -41,7 +41,7 @@ public class PersonMB {
     }
     
     public void createAffair(){
-        affair.createAffair();
+        affair.createAffair(null);
     }
     
     public List<Affair> getAffairs(){

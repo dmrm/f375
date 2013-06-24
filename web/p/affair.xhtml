@@ -2,7 +2,8 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:t="http://myfaces.apache.org/tomahawk">
     
     <f:metadata>
         <f:viewParam name="id" value="#{affairMB.id}"/>
@@ -28,7 +29,7 @@
     </ui:define>
         
     <ui:define name="tempBody">                   
-            <div class="container-fluid" style="margin: 40px 0px">
+            <div class="container-fluid" style="margin: 40px 0px;">
                 <div class="row-fluid">
                     <div class="span6 offset1">
                         <div class="row-fluid">
@@ -46,12 +47,14 @@
                                     <h3 style="margin: 0px 10px; font-weight: 100">Evidences</h3>
                                 </div>
                                 <div class="span2">
-                                    <button class="btn btn-primary pull-right" style="vertical-align: middle">Add affair</button>
+                                    <button class="btn btn-primary pull-right" onclick="document.getElementById('popup-container').style.display = 'block'">Add</button>
                                 </div>                                
                             </div>
                             <legend></legend>     
                             <div>
-                                <!--affairs here-->
+                                <ui:repeat value="#{affairMB.evidences}" var="evi">
+                                    #{evi.id}<br/>
+                                </ui:repeat>
                             </div>
                         </div>
                         <br/>
@@ -61,7 +64,7 @@
                                     <h3 style="margin: 0px 10px; font-weight: 100">Users</h3>
                                 </div>
                                 <div class="span3">
-                                    <button class="btn btn-primary pull-right">Add user</button>
+                                    <button class="btn btn-primary pull-right">Add</button>
                                 </div>                                
                             </div>
                             <legend></legend> 
@@ -72,7 +75,7 @@
                     </div>
                     <div class="span3 offset1">
                         <div class="decor_block">
-                            <form>
+                            <h:form>
                                 <br/>
                                 <div class="row-fluid">
                                     <h:inputTextarea class="span10 offset1"/>
@@ -80,7 +83,7 @@
                                 <div class="row-fluid">
                                     <h:commandButton class="btn span3 offset8" value="Send"/>
                                 </div>
-                            </form>
+                            </h:form>
                         </div>
                         <br/>
                         <div class="decor_block">
@@ -89,6 +92,50 @@
                         </div>
                     </div>
                 </div>
+            </div> 
+        <div id="popup-container">
+             <!--onclick="document.getElementById('popup-container').style.display = 'none'"-->
+            <div class="container-fluid" id="choose-evi">                
+                <div class="row-fluid">
+                    <div id="popup-block" class="span6 offset3 decor_block">                        
+                        <h3 style="margin: 0px 10px; font-weight: 100">Load evidence</h3>
+                        <legend></legend>                        
+                            <h:form id="eviForm" class="form-horizontal" enctype="multipart/form-data">   
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <t:inputFileUpload id="file" value="#{evidenceMB.file}" style="display: none"/>                        
+                                                <div id="photo" class="input-append">
+                                                   <input id="photoCover" readonly="readonly" type="text"/>
+                                                   <a class="btn" onclick="$('input[id=eviForm\\:file]').click();">Browse</a>
+                                                </div>
+                                                <script type="text/javascript">
+                                                    $('input[id=eviForm\\:file]').change(function() {
+                                                       $('#photoCover').val($(this).val());
+                                                    });
+                                                </script>                                     
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <h:inputTextarea value="#{evidenceMB.description}"/>
+                                            </div>
+                                        </div> 
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <div class="btn-group">
+                                                    <h:commandButton class="btn btn-primary" action="#{evidenceMB.loadEvi(affairMB.id)}" value="Add"/>
+                                                    <h:commandButton class="btn" type="reset" onclick="document.getElementById('popup-container').style.display = 'none'" value="Cancel"/>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </h:form>
+                    </div>
+                </div>
             </div>
+        </div>        
     </ui:define>
 </ui:composition>
