@@ -1,0 +1,79 @@
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:t="http://myfaces.apache.org/tomahawk">
+    
+    <ui:define name="tempTitle">Registration</ui:define>
+    
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li class="active"><h:link outcome="register.xhtml">Registration</h:link></li>
+            <li><h:link outcome="users.xhtml">Users</h:link></li>
+        </ul>
+    </ui:define>
+    
+    <ui:define name="tempBody">
+        <br/>
+        <h:form id="regForm" class="form-horizontal" enctype="multipart/form-data">
+            <div class="control-group">
+                <label class="control-label" for="name">Name</label>
+                <div class="controls">
+                    <h:inputText id="name" value="#{registerMB.name}"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="login">Login</label>
+                <div class="controls">
+                    <h:inputText id="login"  required="true" value="#{registerMB.login}">
+                        <f:validateLength minimum="2" maximum="50" />
+                    </h:inputText>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"  required="true" for="password">Password</label>
+                <div class="controls">
+                    <h:inputSecret id="password" required="true" value="#{registerMB.password}">
+                         <f:validateLength minimum="2" maximum="50" />
+                    </h:inputSecret>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="role">Role</label>
+                <div class="controls">
+                    <h:selectOneMenu value="#{registerMB.role}">
+                        <f:selectItem itemValue="OUSER" itemLabel="User"/>
+                        <f:selectItem itemValue="DETECTIVE" itemLabel="Detective"/>
+                        <f:selectItem itemValue="PRIVATE_EYE" itemLabel="Private eye"/>
+                        <f:selectItem itemValue="REGISTRAR" itemLabel="Registrar"/>
+                    </h:selectOneMenu>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="photo">Photo</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <t:inputFileUpload id="file" value="#{registerMB.file}" required="true" style="display: none"/>                        
+                        <div id="photo" class="input-append">
+                            <input id="photoCover" readonly="readonly" class="input-large" type="text"/>
+                           <a class="btn" onclick="$('input[id=regForm\\:file]').click();">Browse</a>
+                        </div>
+                        <script type="text/javascript">
+                            $('input[id=regForm\\:file]').change(function() {
+                               $('#photoCover').val($(this).val());
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <h:commandButton class="btn" type="submit" value="Send" action="#{registerMB.registerUser()}"/>                
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+    
+</ui:composition>

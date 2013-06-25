@@ -1,0 +1,101 @@
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <ui:define name="tempTitle">#{personMB.person}</ui:define>   
+       
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li class="active"><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li><h:link outcome="request.xhtml" rendered="#{request.isUserInRole('OUSER')}">
+                    Request
+                </h:link>
+            </li>
+            <li><h:link outcome="register.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
+                    Registration
+                </h:link>
+            </li>
+            <li><h:link outcome="users.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
+                    Users
+                </h:link>
+            </li>
+            <li><h:link outcome="requests.xhtml" rendered="#{request.isUserInRole('PRIVATE_EYE')}">
+                    Requests
+                    <h:outputText style="padding: 0px 2px; background: orange; color: white; border: 0px; font-weight: 700" class="decor_block" rendered="#{requestMB.requests.size() != 0}" value="#{requestMB.requests.size()}"/> 
+                </h:link>
+            </li>
+        </ul>
+    </ui:define>
+        
+    <ui:define name="tempBody">        
+        <h:panelGroup layout="block" rendered="#{request.isUserInRole('PRIVATE_EYE') || request.isUserInRole('DETECTIVE')}">      
+            
+            <div class="container-fluid" style="margin: 40px 0px">
+                <div class="row-fluid">
+                    <div class="span6 offset1">
+                        <div class="row-fluid">
+                            <div class="span4">
+                                <h:graphicImage class="decor_block" value="#{personMB.photo}"/>
+                            </div>
+                            <div class="span8">
+                                <h3 style="font-weight: 100;">#{personMB.person}</h3>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row-fluid decor_block">
+                            <div class ="row-fluid">
+                                <div class="span10">
+                                    <h3 style="margin: 0px 10px; font-weight: 100">Affairs</h3>
+                                </div>
+                                <div class="span2">
+                                    <h:form>
+                                        <h:commandButton class="btn btn-primary pull-right" action="#{personMB.createAffair()}" value="Add"/>
+                                    </h:form>
+                                </div>                                
+                            </div>
+                            <legend></legend>
+                            <style>
+                                .row-fluid [class*="span1"]:nth-child(12n+1) {
+                                    margin-left: 0;                                             
+                                }
+                            </style>
+                            <div>
+                                <div class="container-fluid">
+                                    <div class="row-fluid">   
+                                        <ui:repeat value="#{personMB.affairs}" var="affair">                                            
+                                            <div class="span1" style="text-align: center">  
+                                                <h:link outcome="affair.xhtml?id=#{affair.id}">                                                                              
+                                                    <h:graphicImage name="/imgs/folder.png"/>   
+                                                    <span style="left: 50%; top: 50%">##{affair.id}</span>
+                                                </h:link>
+                                            </div>                                                
+                                        </ui:repeat>
+                                    </div>
+                                      <div class="row-fluid">
+                                        <h5 style="margin: 0px 5px">You were invited to the following affairs.</h5>
+                                        <legend></legend>
+                                        <ui:repeat value="#{personMB.guestAffairs}" var="affair">                                            
+                                            <div class="span1" style="text-align: center">  
+                                                <h:link outcome="affair.xhtml?id=#{affair.id}">                                                                              
+                                                    <h:graphicImage name="/imgs/folder.png"/>   
+                                                    <span style="left: 50%; top: 50%">##{affair.id}</span>
+                                                </h:link>
+                                            </div>                                                
+                                        </ui:repeat>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:panelGroup> 
+        <h:panelGroup layout="block" rendered="#{request.isUserInRole('OUSER')}">
+            
+        </h:panelGroup> 
+        <h:panelGroup layout="block" rendered="#{request.isUserInRole('REGISTRAR')}">
+            
+        </h:panelGroup> 
+    </ui:define>
+</ui:composition>

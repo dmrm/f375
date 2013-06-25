@@ -1,0 +1,48 @@
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:define name="tempTitle">Anonymous Request</ui:define>
+
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li class="active"><h:link outcome="request.xhtml">
+                    Request
+                </h:link>
+            </li>         
+        </ul>
+    </ui:define>
+
+    <ui:define name="tempBody">
+        <br/>        
+        <h:form class="form-horizontal">
+            <div class="control-group">
+                <h:outputLabel class="control-label" for="handler" value="Choose handler: "/> 
+                <div class="controls">
+                    <h:selectOneListbox id="handler" value="#{requestMB.handler}" >
+                        <f:selectItem itemLabel="Police detective"  itemValue="1" />
+                        <f:selectItem itemLabel="Private eye" itemValue="2"/>
+                    </h:selectOneListbox>
+                </div>
+            </div>
+            <div class="control-group">
+                <h:outputLabel class="control-label" for="textarea" value="Request text: "/> 
+                <div class="controls">
+                    <h:inputTextarea id="textarea" required="true">
+                        <f:validateLength minimum="1" maximum="1000" />
+                    </h:inputTextarea>
+                        
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <h:commandButton class="btn" type="submit" value="Send" action="#{requestMB.send()}"/>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+        
+</ui:composition>

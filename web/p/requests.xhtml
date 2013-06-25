@@ -1,0 +1,54 @@
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:define name="tempTitle">Request</ui:define>
+    
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li class="active">
+                <h:link outcome="requests.xhtml">
+                    Requests
+                     <h:outputText style="padding: 0px 2px; background: orange; color: white; border: 0px; font-weight: 700" class="decor_block" rendered="#{requestMB.requests.size() != 0}" value="#{requestMB.requests.size()}"/> 
+                </h:link>
+            </li>
+        </ul>
+    </ui:define>
+    
+    <ui:define name="tempBody">
+        <div style="margin-top: 40px" class="container-fluid">
+            <div class="row-fluid"> 
+               <div class="span10 offset1 decor_block">
+                    <table class="table table-condensed table-hover">
+                         <thead>
+                             <tr>
+                                 <th class="span2">User</th>
+                                 <th class="span6">Request</th>
+                                 <th class="span2">Action</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                            <ui:repeat value="#{requestMB.requests}" var="req">
+                                <tr>
+                                    <td>#{req.requestBy}</td>
+                                    <td>#{req.text}</td>
+                                    <td>                                        
+                                        <h:form>
+                                            <span class="btn-group">
+                                                <h:commandButton action="#{requestsMB.acceptReques(req.id)}" value="Accept" class="btn btn-primary"/>
+                                                <h:commandButton action="#{requestsMB.declineRequest(req.id)}" value="Decline" class="btn"/>
+                                            </span>
+                                        </h:form>                                        
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                         </tbody>
+                    </table>
+               </div>
+            </div>
+         </div>
+    </ui:define>
+    
+</ui:composition>

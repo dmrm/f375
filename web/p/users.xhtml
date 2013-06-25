@@ -1,0 +1,53 @@
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:define name="tempTitle">Users</ui:define>
+    
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li><h:link outcome="register.xhtml">
+                    Registration
+                </h:link>
+            </li>
+            <li class="active"><h:link outcome="users.xhtml">
+                    Users
+                </h:link>
+            </li>
+        </ul>
+    </ui:define>
+    
+    <ui:define name="tempBody">
+        <div style="margin-top: 40px" class="container-fluid">
+            <div class="row-fluid"> 
+               <div class="span8 offset2 decor_block">
+                    <table class="table table-condensed table-hover">
+                        <thead>
+                            <th>Name</th>
+                            <th>Login</th>
+                            <th>Password</th>
+                            <th>Groups</th>
+                        </thead>
+                        <tbody>
+                            <ui:repeat value="#{usersMB.users}" var="user">
+                               <tr>
+                                    <td class="span2">#{user.name}</td>
+                                    <td class="span2">#{user.login}</td>
+                                    <td class="span2">#{user.password}</td>
+                                    <td class="span2">
+                                        <ui:repeat value="#{user.user_groups}" var="group">
+                                             #{group}<br/>
+                                        </ui:repeat>
+                                    </td>
+                               </tr>
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+               </div>
+            </div>
+         </div>
+    </ui:define>
+    
+</ui:composition>

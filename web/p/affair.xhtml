@@ -1,0 +1,179 @@
+<ui:composition template="/WEB-INF/templates/laftemplate.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:t="http://myfaces.apache.org/tomahawk">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{affairMB.id}"/>
+        <f:event type="preRenderView" listener="#{affairMB.init()}" />
+
+        <f:viewParam name="id" value="#{messageMB.id}"/>
+        <f:event type="preRenderView" listener="#{messageMB.init()}" />
+    </f:metadata>
+
+
+    <ui:define name="tempTitle">Affairs</ui:define>   
+
+    <ui:define name="tempNav">
+        <ul class="nav">
+            <li class="active"><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
+            <li><h:link outcome="requests.xhtml">
+                    Requests
+                    <span style="padding: 0px 2px; background: orange; color: white; border: 0px" class="decor_block">
+                        <b>
+                            4
+                        </b>
+                    </span>
+                </h:link>
+            </li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="tempBody">                   
+        <div class="container-fluid" style="margin: 40px 0px;">
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <h:graphicImage class="decor_block" name="imgs/folder.png"/>
+                        </div>
+                        <div class="span8">
+                            <h3 style="font-weight: 100;">Affair ##{affairMB.affair.id}</h3>
+                            <h:outputLabel value="It's your affair." rendered="#{usersMB.currentUser() == affairMB.affair.owner.login}"/>
+                            <h:outputLabel value="It's affair of #{affairMB.affair.owner.name}." rendered="#{usersMB.currentUser() != affairMB.affair.owner.login}"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row-fluid decor_block">
+                        <div class ="row-fluid">
+                            <div class="span10">
+                                <h3 style="margin: 0px 10px; font-weight: 100">Evidences</h3>
+                            </div>
+                            <div class="span2">
+                                <button class="btn btn-primary pull-right" onclick="document.getElementById('eviContainer').style.display = 'block'">Add</button>
+                            </div>                                
+                        </div>
+                        <legend></legend>     
+                        <div>
+                            <ui:repeat value="#{affairMB.evidences}" var="evi">
+                                <h:outputLink class="span1" value="/Oatmeal#{evi.eviPath}">#{evi.id}</h:outputLink>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row-fluid decor_block">
+                        <div class ="row-fluid">
+                            <div class="span9">
+                                <h3 style="margin: 0px 10px; font-weight: 100">Users</h3>
+                            </div>
+                            <div class="span3">
+                                <button onclick="getElementById('usrContainer').style.display = 'block';" class="btn btn-primary pull-right">Add</button>
+                            </div>                                
+                        </div>
+                        <legend></legend> 
+                        <div>
+                            <ui:repeat value="#{affairMB.users}" var="user">
+                                #{user.name}<br/>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </div>
+                <div class="span3 offset1">
+                    <div class="decor_block">
+                        <h:form>
+                            <br/>
+                            <div class="row-fluid">
+                                    <h:inputTextarea id="chatik" value="#{messageMB.message.text}" class="span10 offset1">
+                                    
+                                </h:inputTextarea>
+                            </div>
+                            <div class="row-fluid">
+                                <h:commandButton class="btn span3 offset8" value="Send" action="#{messageMB.send()}"/>
+                            </div>
+                        </h:form>
+                    </div>
+                    <br/>
+                    <div class="decor_block">
+                        <h3 style="margin: 0px 10px; font-weight: 100">Messages</h3>
+                        <div class="container-fluid">
+                            <ui:repeat value="#{messageMB.listMessage}" var="messages">                                            
+                                <div>#{messages.user.name} #{messages.dateM}: #{messages.text}</div>                                                                                        
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div id="eviContainer" class="popup-container">
+            <!--onclick="document.getElementById('popup-container').style.display = 'none'"-->
+            <div class="container-fluid" id="choose-evi">                
+                <div class="row-fluid">
+                    <div id="eviBlock" class="span6 offset3 popup-block decor_block">                        
+                        <h3 style="margin: 0px 10px; font-weight: 100">Load evidence</h3>
+                        <legend></legend>                        
+                        <h:form id="eviForm" class="form-horizontal" enctype="multipart/form-data">   
+                            <div class="container">
+                                <div class="row">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <t:inputFileUpload id="file" value="#{evidenceMB.file}" style="display: none"/>                        
+                                            <div id="photo" class="input-append">
+                                                <input id="photoCover" readonly="readonly" type="text"/>
+                                                <a class="btn" onclick="$('input[id=eviForm\\:file]').click();">Browse</a>
+                                            </div>
+                                            <script type="text/javascript">
+                                                $('input[id=eviForm\\:file]').change(function() {
+                                                    $('#photoCover').val($(this).val());
+                                                });
+                                            </script>                                     
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <h:inputTextarea value="#{evidenceMB.description}"/>
+                                        </div>
+                                    </div> 
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <div class="btn-group">
+                                                <h:commandButton class="btn btn-primary" action="#{evidenceMB.loadEvi(affairMB.id)}" value="Add"/>
+                                                <h:commandButton class="btn" type="reset" onclick="document.getElementById('eviContainer').style.display = 'none'" value="Cancel"/>
+                                            </div>
+                                        </div>
+                                    </div>                                        
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <div id="usrContainer" class="popup-container">
+            <div class="container-fluid" id="choose-evi">                
+                <div class="row-fluid">
+                    <div id="usrBlock" class="span6 offset3 popup-block decor_block">                        
+                        <h3 style="margin: 0px 10px; font-weight: 100">Select users</h3>
+                        <legend></legend>
+                        <h:form>
+                            <div class="row">
+                                <div class="span10 offset1">
+                                    <ui:repeat value="#{affairMB.responsibleUsers}" var="user">
+                                        <h:commandLink action="#{affairMB.attachUser(user.login)}">
+                                            <div class="span2" style="text-align: center">
+                                                <h:graphicImage value="#{user.photo}"/>
+                                                #{user.name}
+                                            </div>
+                                        </h:commandLink>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <button class="btn span2 offset1" style="margin-bottom: 10px" onclick="getElementById('usrContainer').style.display = 'none';">Cancel</button>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
