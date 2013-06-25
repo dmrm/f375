@@ -52,7 +52,7 @@ public class UserDAO {
         TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
         return query.getResultList();
     }
-    
+        
     public List<String> getAllUsersInDetectiveRoles(long affairId, String login){
         Query query = em.createNativeQuery("SELECT DISTINCT(u.login) FROM \n" +
                                            "userstable u, user_groups g \n" +
@@ -67,6 +67,11 @@ public class UserDAO {
                 .setParameter("affairId", affairId)
                 .setParameter("login", login)
                 .getResultList();
+    }
+
+    public String lessBusyUser() {
+        TypedQuery<String> query = em.createQuery("SELECT MIN u FROM Affair a JOIN a.owner u", String.class);
+        return query.getSingleResult();
     }
        
 }

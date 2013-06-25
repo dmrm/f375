@@ -7,6 +7,7 @@ package ru.ifmo.pe.oatmeal.mbeans;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import ru.ifmo.pe.oatmeal.business.Person;
 import ru.ifmo.pe.oatmeal.model.User;
 
@@ -22,6 +23,10 @@ public class UsersMB {
     
     public List<User> getUsers(){
         return person.getUsers();
+    }
+    
+    public String currentUser(){
+        return FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
     }
     
 }

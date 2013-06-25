@@ -8,13 +8,10 @@
     <ui:define name="tempNav">
         <ul class="nav">
             <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
-            <li class="active"><h:link outcome="requests.xhtml">
+            <li class="active">
+                <h:link outcome="requests.xhtml">
                     Requests
-                    <span style="padding: 0px 2px; background: orange; color: white; border: 0px" class="decor_block">
-                        <b>
-                            4
-                        </b>
-                    </span>
+                     <h:outputText style="padding: 0px 2px; background: orange; color: white; border: 0px; font-weight: 700" class="decor_block" rendered="#{requestMB.requests.size() != 0}" value="#{requestMB.requests.size()}"/> 
                 </h:link>
             </li>
         </ul>
@@ -28,28 +25,27 @@
                          <thead>
                              <tr>
                                  <th class="span2">User</th>
-                                 <th class="span1">Type</th>
-                                 <th class="span5">Request</th>
+                                 <th class="span6">Request</th>
                                  <th class="span2">Action</th>
                              </tr>
                          </thead>
                          <tbody>
-                             <!--Generate rows-->
-                             <tr>
-                                 <td>User</td>
-                                 <td>Type</td>
-                                 <td>Request</td>
-                                 <td>
-                                     <span class="btn-group">
-                                         <button class="btn btn-primary">
-                                             Accept
-                                         </button>
-                                         <button class="btn">
-                                             Decline
-                                         </button>
-                                     </span>
-                                 </td>
-                             </tr>
+                            <ui:repeat value="#{requestMB.requests}" var="req">
+                                <tr>
+                                    <td>#{req.requestBy}</td>
+                                    <td>#{req.text}</td>
+                                    <td>
+                                        <span class="btn-group">
+                                            <button class="btn btn-primary">
+                                                Accept
+                                            </button>
+                                            <button class="btn">
+                                                Decline
+                                            </button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </ui:repeat>
                          </tbody>
                     </table>
                </div>

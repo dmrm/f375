@@ -39,13 +39,22 @@ public class Affair {
         String user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         return affairDAO.findAllByUser(userDAO.find(user));
     }
-
-    public void createAffair(String description) {        
-        String user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();        
+    
+    public List<ru.ifmo.pe.oatmeal.model.Affair> getUserGuestAffairs() {
+        String user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        return affairDAO.findUserGuestAffair(userDAO.find(user));
+    }
+    
+    public void createAffair(String description, String user) {               
         ru.ifmo.pe.oatmeal.model.Affair affair = new ru.ifmo.pe.oatmeal.model.Affair();     
         affair.setOwner(userDAO.find(user));
         affair.setDescription(description);
         affairDAO.save(affair);
+    }
+
+    public void createAffair(String description) {        
+        String user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();        
+        createAffair(description, user);
     }
     
     public ru.ifmo.pe.oatmeal.model.Affair affairByIdAndUser(String login, long affairId){
@@ -99,6 +108,6 @@ public class Affair {
             users.add(userDAO.find(user));
         }
         return users;
-    }
+    }  
     
 }

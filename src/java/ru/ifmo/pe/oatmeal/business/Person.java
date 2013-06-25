@@ -37,4 +37,8 @@ public class Person {
         return userDAO.getAllUsers();
     }
     
+    public String findLessBusyUser() {
+        return userDAO.lessBusyUser();
+    }
+    
 }

@@ -48,4 +48,8 @@ public class PersonMB {
         return affair.getUserAffairs();
     }
     
+    public List<Affair> getGuestAffairs(){
+        return affair.getUserGuestAffairs();
+    }
+    
 }

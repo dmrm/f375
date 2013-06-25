@@ -38,6 +38,8 @@
                             </div>
                             <div class="span8">
                                 <h3 style="font-weight: 100;">Affair ##{affairMB.affair.id}</h3>
+                                <h:outputLabel value="It's your affair." rendered="#{usersMB.currentUser() == affairMB.affair.owner.login}"/>
+                                <h:outputLabel value="It's affair of #{affairMB.affair.owner.name}." rendered="#{usersMB.currentUser() != affairMB.affair.owner.login}"/>
                             </div>
                         </div>
                         <br/>
@@ -53,7 +55,7 @@
                             <legend></legend>     
                             <div>
                                 <ui:repeat value="#{affairMB.evidences}" var="evi">
-                                    #{evi.id}<br/>
+                                    <h:outputLink class="span1" value="/Oatmeal#{evi.eviPath}">#{evi.id}</h:outputLink>
                                 </ui:repeat>
                             </div>
                         </div>
