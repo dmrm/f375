@@ -7,12 +7,10 @@ package ru.ifmo.pe.oatmeal.mbeans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -40,13 +38,13 @@ public class MessageMB implements Serializable {
         listMessage = messageLogic.getMessagesAttachedAffair(id);
     }
 
-    private void validateFile() throws ValidatorException {
+    private void validateMessage() throws ValidatorException {
         if (message.getText().isEmpty()||message.getText().length()>255) {
-            FacesMessage message = new FacesMessage();
-            message.setDetail("Message is not valid");
-            message.setSummary("Message is not valid");
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(message);
+            FacesMessage mess = new FacesMessage();
+            mess.setDetail("Message is not valid");
+            mess.setSummary("Message is not valid");
+            mess.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(mess);
         }
     }
 
@@ -55,9 +53,9 @@ public class MessageMB implements Serializable {
         String userStr = ec.getUserPrincipal().getName();
         User user = messageLogic.getUserByLogin(userStr);
         Affair affair = messageLogic.getAffairByID(id);
-        //message.setText(str);
         try {
-            validateFile();
+            //Валидация сообщения(средства JSF exeption)
+            validateMessage();
         } catch (ValidatorException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
@@ -66,8 +64,9 @@ public class MessageMB implements Serializable {
         message.setUser(user);
         message.setAffair(affair);
         message.setDateM(new Date());
-        System.out.println(new Date());
+        //Добавить сообщение
         messageLogic.save(message);
+        //обновить сообщения, прикреплённые к делу
         listMessage = messageLogic.getMessagesAttachedAffair(id);
     }
 

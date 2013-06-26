@@ -25,7 +25,7 @@ public class EvidenceMB {
     
     @EJB
     private Affair affair;
-    private final long maxFileSuze = 1024*1024*10;
+    private final long maxFileSize = 1024*1024*10;
     private static final String eviPath = "files/evis/";
     private static final String refPath = "/evis/";
     
@@ -57,8 +57,8 @@ public class EvidenceMB {
         this.file = file;
     }
     
-    private void validateFile(String contentType, long fileSize) throws ValidatorException {
-        if (fileSize > maxFileSuze) {
+    private void validateFile(long fileSize) throws ValidatorException {
+        if (fileSize > maxFileSize) {
             FacesMessage message = new FacesMessage();
             message.setDetail("Size file > 10 mb");
             message.setSummary("Size file > 10 mb");
@@ -75,7 +75,7 @@ public class EvidenceMB {
         byte[] byteFile = file.getBytes();
         if (file != null) {
             try {
-                validateFile(file.getContentType(), file.getSize());
+                validateFile(file.getSize());
             } catch (ValidatorException e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                         FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
