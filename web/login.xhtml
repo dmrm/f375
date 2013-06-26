@@ -9,16 +9,11 @@
     </f:metadata>
     
     <ui:define name="tempTitle">Oatmeal, sir!</ui:define>
-    
-    <ui:define name="tempNav">
-        <ul class="nav">
-            <li class="active"><h:link outcome="login.xhtml">Login</h:link></li>
-            <li><h:link outcome="anonymous_request.xhtml">Anonymous request</h:link></li>
-            <li><h:link outcome="video_feature.xhtml">Video</h:link></li>
-        </ul>
-    </ui:define>
-    
+       
     <ui:define name="tempBody">
+        <script>
+            document.getElementById("login").className += 'active';
+        </script>
         <br/>
         <h:panelGroup layout="block" id="errMessage" class="alert alert-error span10 offset1" rendered="#{loginMB.err}">
             <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">

@@ -4,33 +4,12 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
  
     <ui:define name="tempTitle">#{personMB.person}</ui:define>   
-       
-    <ui:define name="tempNav">
-        <ul class="nav">
-            <li class="active"><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
-            <li><h:link outcome="request.xhtml" rendered="#{request.isUserInRole('OUSER')}">
-                    Request
-                </h:link>
-            </li>
-            <li><h:link outcome="register.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
-                    Registration
-                </h:link>
-            </li>
-            <li><h:link outcome="users.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
-                    Users
-                </h:link>
-            </li>
-            <li><h:link outcome="requests.xhtml" rendered="#{request.isUserInRole('PRIVATE_EYE')}">
-                    Requests
-                    <h:outputText style="padding: 0px 2px; background: orange; color: white; border: 0px; font-weight: 700" class="decor_block" rendered="#{requestMB.requests.size() != 0}" value="#{requestMB.requests.size()}"/> 
-                </h:link>
-            </li>
-        </ul>
-    </ui:define>
-        
-    <ui:define name="tempBody">        
+ 
+    <ui:define name="tempBody"> 
+        <script>
+            document.getElementById("person").className += 'active';
+        </script>
         <h:panelGroup layout="block" rendered="#{request.isUserInRole('PRIVATE_EYE') || request.isUserInRole('DETECTIVE')}">      
-            
             <div class="container-fluid" style="margin: 40px 0px">
                 <div class="row-fluid">
                     <div class="span6 offset1">

@@ -4,22 +4,11 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     
     <ui:define name="tempTitle">Users</ui:define>
-    
-    <ui:define name="tempNav">
-        <ul class="nav">
-            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
-            <li><h:link outcome="register.xhtml">
-                    Registration
-                </h:link>
-            </li>
-            <li class="active"><h:link outcome="users.xhtml">
-                    Users
-                </h:link>
-            </li>
-        </ul>
-    </ui:define>
-    
+        
     <ui:define name="tempBody">
+        <script>
+            document.getElementById("users").className += 'active';
+        </script>
         <div style="margin-top: 40px" class="container-fluid">
             <div class="row-fluid"> 
                <div class="span8 offset2 decor_block">

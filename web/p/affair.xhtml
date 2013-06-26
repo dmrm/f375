@@ -12,23 +12,11 @@
         
  
     <ui:define name="tempTitle">Affairs</ui:define>   
-       
-    <ui:define name="tempNav">
-        <ul class="nav">
-            <li class="active"><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
-            <li><h:link outcome="requests.xhtml">
-                    Requests
-                    <span style="padding: 0px 2px; background: orange; color: white; border: 0px" class="decor_block">
-                        <b>
-                            4
-                        </b>
-                    </span>
-                </h:link>
-            </li>
-        </ul>
-    </ui:define>
-        
-    <ui:define name="tempBody">                   
+
+    <ui:define name="tempBody">    
+        <script>
+            document.getElementById("affair").className += 'active';
+        </script>
             <div class="container-fluid" style="margin: 40px 0px;">
                 <div class="row-fluid">
                     <div class="span6 offset1">

@@ -11,7 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import ru.ifmo.pe.oatmeal.business.Affair;
-import ru.ifmo.pe.oatmeal.model.AffairUsers;
 import ru.ifmo.pe.oatmeal.model.Evidence;
 import ru.ifmo.pe.oatmeal.model.User;
 

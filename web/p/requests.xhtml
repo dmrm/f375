@@ -5,19 +5,10 @@
     
     <ui:define name="tempTitle">Request</ui:define>
     
-    <ui:define name="tempNav">
-        <ul class="nav">
-            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
-            <li class="active">
-                <h:link outcome="requests.xhtml">
-                    Requests
-                     <h:outputText style="padding: 0px 2px; background: orange; color: white; border: 0px; font-weight: 700" class="decor_block" rendered="#{requestMB.requests.size() != 0}" value="#{requestMB.requests.size()}"/> 
-                </h:link>
-            </li>
-        </ul>
-    </ui:define>
-    
     <ui:define name="tempBody">
+        <script>
+            document.getElementById("requests").className += 'active';
+        </script>
         <div style="margin-top: 40px" class="container-fluid">
             <div class="row-fluid"> 
                <div class="span10 offset1 decor_block">

@@ -6,16 +6,11 @@
                 xmlns:t="http://myfaces.apache.org/tomahawk">
     
     <ui:define name="tempTitle">Registration</ui:define>
-    
-    <ui:define name="tempNav">
-        <ul class="nav">
-            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
-            <li class="active"><h:link outcome="register.xhtml">Registration</h:link></li>
-            <li><h:link outcome="users.xhtml">Users</h:link></li>
-        </ul>
-    </ui:define>
-    
+
     <ui:define name="tempBody">
+        <script>
+            document.getElementById("register").className += 'active';
+        </script>
         <br/>
         <h:form id="regForm" class="form-horizontal" enctype="multipart/form-data">
             <div class="control-group">

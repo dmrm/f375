@@ -8,16 +8,11 @@
     <ui:define name="tempLogo">
         <a  class="brand"  href="#"><img src="resources/imgs/taxi.png"/></a>
     </ui:define>
-
-    <ui:define name="tempNav">
-        <ul class="nav">
-            <li><h:link outcome="login.xhtml">Login</h:link></li>
-            <li><h:link outcome="anonymous_request.xhtml">Anonymous request</h:link></li>
-            <li class="active"><h:link outcome="video_feature.xhtml">Video</h:link></li>
-        </ul>     
-    </ui:define>
-
+    
     <ui:define name="tempBody">
+        <script>
+            document.getElementById("video_feature").className += 'active';
+        </script>
         <iframe width="1280" height="720" src="http://www.youtube.com/embed/6dQako8PlA0" frameborder="0"></iframe>
         <style>
             body{

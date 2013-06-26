@@ -6,17 +6,10 @@
     
     <ui:define name="tempTitle">Anonymous Request</ui:define>
 
-    <ui:define name="tempNav">
-        <ul class="nav">
-            <li><h:link outcome="person.xhtml">#{personMB.person}</h:link></li>
-            <li class="active"><h:link outcome="request.xhtml">
-                    Request
-                </h:link>
-            </li>         
-        </ul>
-    </ui:define>
-
     <ui:define name="tempBody">
+        <script>
+            document.getElementById("request").className += 'active';
+        </script>
         <br/>        
         <h:form class="form-horizontal">
             <div class="control-group">

@@ -10,7 +10,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import ru.ifmo.pe.oatmeal.business.Person;
 import ru.ifmo.pe.oatmeal.model.Affair;
 

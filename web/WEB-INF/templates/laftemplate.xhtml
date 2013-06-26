@@ -31,7 +31,30 @@ and open the template in the editor.
                         }
                     </style>
                 </ui:insert>
-                <ui:insert name="tempNav"/>                
+                <ul class="nav">
+                    <li id="person"><h:link outcome="person.xhtml" rendered="#{not empty request.remoteUser}">#{personMB.person}</h:link></li>
+                    <li id="request"><h:link outcome="request.xhtml" rendered="#{request.isUserInRole('OUSER')}">
+                            Request
+                        </h:link>
+                    </li>
+                    <li id="register"><h:link outcome="register.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
+                            Registration
+                        </h:link>
+                    </li>
+                    <li id="users"><h:link outcome="users.xhtml" rendered="#{request.isUserInRole('REGISTRAR')}">
+                            Users
+                        </h:link>
+                    </li>
+                    <li id="requests"><h:link outcome="requests.xhtml" rendered="#{request.isUserInRole('PRIVATE_EYE')}">
+                            Requests
+                            <h:outputText style="padding: 0px 2px; background: orange; color: white; border: 0px; font-weight: 700" class="decor_block" rendered="#{requestMB.requests.size() != 0}" value="#{requestMB.requests.size()}"/> 
+                        </h:link>
+                    </li>
+                    <li id="login"><h:link outcome="login.xhtml" rendered="#{empty request.remoteUser}">Login</h:link></li>
+                    <li id="anonymous_request"><h:link outcome="anonymous_request.xhtml" rendered="#{empty request.remoteUser}">Anonymous request</h:link></li>
+                    <li id="video_feature"><h:link outcome="video_feature.xhtml" rendered="#{empty request.remoteUser}">Video</h:link></li>
+                </ul>    
+                <ui:insert name="tempNav"/>
                 <h:form rendered="#{not empty request.remoteUser}">
                     <ul class="nav pull-right">
                         <li><h:commandLink action="#{personMB.logout()}">Logout(#{request.remoteUser})</h:commandLink></li>
