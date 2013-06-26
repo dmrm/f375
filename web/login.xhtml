@@ -21,7 +21,7 @@
     <ui:define name="tempBody">
         <br/>
         <h:panelGroup layout="block" id="errMessage" class="alert alert-error span10 offset1" rendered="#{loginMB.err}">
-          <button class="close" data-dismiss="alert" type="button">
+            <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">
             ×
           </button>
             login failed
