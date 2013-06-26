@@ -38,11 +38,11 @@ public class Request implements Serializable{
         this.text = text;
     }
 
-    public String getHandler() {
+    public String getHandlerType() {
         return handlerType;
     }
 
-    public void setHandler(String handler) {
+    public void setHandlerType(String handler) {
         this.handlerType = handler;
     }
 

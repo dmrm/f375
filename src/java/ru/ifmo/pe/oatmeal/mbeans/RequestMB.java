@@ -51,7 +51,7 @@ public class RequestMB {
             String user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
             r.setRequestBy(user);
             r.setText(text);
-            r.setHandler("PRIVATE_EYE");
+            r.setHandlerType("PRIVATE_EYE");
             req.saveRequest(r);
         } else {
             affair.createAffair(text, person.findLessBusyUser());

@@ -71,20 +71,22 @@
                                                 </h:link>
                                             </div>                                                
                                         </ui:repeat>
-                                    </div>
+                                    </div>                                    
+                                </div>
+                                <div class="container-fluid">
                                       <div class="row-fluid">
                                         <h5 style="margin: 0px 5px">You were invited to the following affairs.</h5>
                                         <legend></legend>
-                                        <ui:repeat value="#{personMB.guestAffairs}" var="affair">                                            
-                                            <div class="span1" style="text-align: center">  
-                                                <h:link outcome="affair.xhtml?id=#{affair.id}">                                                                              
-                                                    <h:graphicImage name="/imgs/folder.png"/>   
-                                                    <span style="left: 50%; top: 50%">##{affair.id}</span>
-                                                </h:link>
-                                            </div>                                                
-                                        </ui:repeat>
+                                            <ui:repeat value="#{personMB.guestAffairs}" var="affair">                                            
+                                                <div class="span1" style="text-align: center">  
+                                                    <h:link outcome="affair.xhtml?id=#{affair.id}">                                                                              
+                                                        <h:graphicImage name="/imgs/folder.png"/>   
+                                                        <span style="left: 50%; top: 50%">##{affair.id}</span>
+                                                    </h:link>
+                                                </div>                                                
+                                            </ui:repeat>
+                                        </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>

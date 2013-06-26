@@ -1,7 +1,12 @@
 <ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">    
+    
+    <f:metadata>
+        <f:viewParam name="err" value="#{loginMB.err}"/>
+    </f:metadata>
     
     <ui:define name="tempTitle">Oatmeal, sir!</ui:define>
     
@@ -15,25 +20,31 @@
     
     <ui:define name="tempBody">
         <br/>
-        <form class="form-horizontal" action="j_security_check" method="post">
+        <h:panelGroup layout="block" id="errMessage" class="alert alert-error span10 offset1" rendered="#{loginMB.err}">
+          <button class="close" data-dismiss="alert" type="button">
+            ×
+          </button>
+            login failed
+        </h:panelGroup>
+        <h:form class="form-horizontal">
             <div class="control-group">
-                <h:outputLabel class="control-label" for="j_username" value="Login: "/> 
+                <h:outputLabel class="control-label" for="username" value="Login: "/> 
                 <div class="controls">
-                <h:inputText id="j_username" autocomplete="off"/>
+                    <h:inputText id="username" value="#{loginMB.login}" autocomplete="off"/>
                 </div>
             </div>
             <div class="control-group">
-                <h:outputLabel class="control-label" for="j_password" value="Password: "/> 
+                <h:outputLabel class="control-label" for="password" value="Password: "/> 
                 <div class="controls">
-                    <h:inputSecret id="j_password" autocomplete="off"/>
+                    <h:inputSecret id="password" value="#{loginMB.password}" autocomplete="off"/>
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <h:commandButton class="btn" type="submit" value="Login"/>
+                    <h:commandButton class="btn" action="#{loginMB.submit()}" value="Login"/>
                 </div>
             </div>
-        </form>
+        </h:form>
     </ui:define>
     
 </ui:composition>
