@@ -26,7 +26,7 @@ public class RequestMB {
     @EJB
     private Person person;
     
-    private int handler;
+    private int handler = 1;
     private String text;
 
     public int getHandler() {
@@ -51,10 +51,10 @@ public class RequestMB {
             String user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
             r.setRequestBy(user);
             r.setText(text);
-            r.setHandlerType("PRIVATE_EYE");
+            r.setHandler("PRIVATE_EYE");
             req.saveRequest(r);
         } else {
-            affair.createAffair(text, person.findLessBusyUser());
+            affair.createAffair(text, "moriarty");
         }
     }
     

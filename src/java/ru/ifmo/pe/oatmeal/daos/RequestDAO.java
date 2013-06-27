@@ -30,4 +30,14 @@ public class RequestDAO {
         em.persist(r);
     }
     
+    public Request find(long id){
+        return em.find(Request.class, id);
+    }
+        
+    public void remove(long id){
+        Request req = find(id);
+        if(req != null){
+            em.remove(req);
+        }
+    }  
 }
