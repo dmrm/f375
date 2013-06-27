@@ -27,16 +27,16 @@ import javax.persistence.UniqueConstraint;
 public class User implements Serializable{
     
     @Id
-    @Column(unique=true, nullable=false)
+    @Column(unique=true, nullable=false, length=50)
     private String login;
     
-    @Column(nullable=false)
+    @Column(nullable=false, length=50)
     private String password;
     
-    @Column(nullable=false)
+    @Column(nullable=false, length=255)
     private String photo;
           
-    @Column(nullable=false)
+    @Column(nullable=false, length=100)
     private String name;
     
     @ElementCollection(targetClass=Group.class, fetch=FetchType.EAGER)

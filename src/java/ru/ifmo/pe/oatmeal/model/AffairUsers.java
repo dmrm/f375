@@ -18,13 +18,13 @@ import javax.persistence.ManyToOne;
 public class AffairUsers implements Serializable{
     
     @Id @GeneratedValue
-    private int id;
+    private long id;
     @ManyToOne
     private Affair affair;
     @ManyToOne
     private User user;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -5,6 +5,7 @@
 package ru.ifmo.pe.oatmeal.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,12 +18,13 @@ import javax.persistence.Id;
 public class Request implements Serializable{
     
     @Id @GeneratedValue    
-    private int id;
+    private long id;
+    @Column(nullable=false)
     private String requestBy;
+    @Column(nullable=false, length=1000)
     private String text;
-    private String handlerType;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -36,14 +38,6 @@ public class Request implements Serializable{
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public String getHandlerType() {
-        return handlerType;
-    }
-
-    public void setHandlerType(String handler) {
-        this.handlerType = handler;
     }
 
     public String getRequestBy() {

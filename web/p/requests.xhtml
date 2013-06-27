@@ -26,14 +26,12 @@
                                     <td>#{req.requestBy}</td>
                                     <td>#{req.text}</td>
                                     <td>
-                                        <span class="btn-group">
-                                            <button class="btn btn-primary">
-                                                Accept
-                                            </button>
-                                            <button class="btn">
-                                                Decline
-                                            </button>
-                                        </span>
+                                        <h:form>
+                                            <span class="btn-group">
+                                                <h:commandButton action="#{requestsMB.acceptRequest(req.id)}" class="btn btn-primary" value="Accept"/>
+                                                    <h:commandButton action="#{requestsMB.declineRequest(req.id)}" class="btn" value="Decline"/>
+                                            </span>
+                                        </h:form>
                                     </td>
                                 </tr>
                             </ui:repeat>

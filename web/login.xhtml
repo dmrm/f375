@@ -13,25 +13,31 @@
     <ui:define name="tempBody">
         <script>
             document.getElementById("login").className += 'active';
+            
         </script>
-        <br/>
-        <h:panelGroup layout="block" id="errMessage" class="alert alert-error span10 offset1" rendered="#{loginMB.err}">
-            <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">
-            ×
-          </button>
-            login failed
+        <br/>       
+        <h:panelGroup layout="block" id="errMessage" class="alert alert-error span10 offset1" rendered="#{facesContext.validationFailed || loginMB.err}">
+              <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">
+                ×
+              </button>
+            <h:outputText value="Combination of login and password is wrong" rendered="#{loginMB.err}"/>
+            <h:messages style="margin: 0px 15px"/>
         </h:panelGroup>
         <h:form class="form-horizontal">
             <div class="control-group">
                 <h:outputLabel class="control-label" for="username" value="Login: "/> 
                 <div class="controls">
-                    <h:inputText id="username" value="#{loginMB.login}" autocomplete="off"/>
+                    <h:inputText id="username" value="#{loginMB.login}" autocomplete="off" label="Login">
+                        <f:validateLength minimum="1" maximum="50"/>
+                    </h:inputText>
                 </div>
             </div>
             <div class="control-group">
                 <h:outputLabel class="control-label" for="password" value="Password: "/> 
                 <div class="controls">
-                    <h:inputSecret id="password" value="#{loginMB.password}" autocomplete="off"/>
+                    <h:inputSecret id="password" value="#{loginMB.password}" autocomplete="off" label="Password">
+                        <f:validateLength minimum="1" maximum="50"/>
+                    </h:inputSecret>
                 </div>
             </div>
             <div class="control-group">

@@ -6,7 +6,6 @@ package ru.ifmo.pe.oatmeal.mbeans;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import ru.ifmo.pe.oatmeal.business.Request;
 import ru.ifmo.pe.oatmeal.business.Requests;
 
 /**
@@ -19,7 +18,7 @@ public class RequestsMB {
     @EJB
     private Requests reqs;
     
-    public void acceptReques(long reqId){
+    public void acceptRequest(long reqId){
         reqs.acceptRequest(reqId);
     }
     

@@ -52,7 +52,6 @@ public class LoginMB {
             request.login(login, password);
             return "/p/person.xhtml?faces-redirect=true";
         } catch (ServletException e) {
-            //context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Unknown login", null));
             return "login.xhtml?err=true&faces-redirect=true";
         }
     }

@@ -5,6 +5,7 @@
 package ru.ifmo.pe.oatmeal.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,6 +22,7 @@ public class Affair implements Serializable{
     private long id;
     @ManyToOne
     private User owner;
+    @Column(nullable=false, length=1000)
     private String description;
 
     public Affair() {

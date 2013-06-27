@@ -12,23 +12,36 @@
             document.getElementById("register").className += 'active';
         </script>
         <br/>
+        <h:panelGroup layout="block" id="errMessage" class="alert alert-error span10 offset1" rendered="#{facesContext.validationFailed}">
+            <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">
+              ×
+            </button>
+            <h:messages style="margin: 0px 15px"/>
+        </h:panelGroup>
         <h:form id="regForm" class="form-horizontal" enctype="multipart/form-data">
             <div class="control-group">
                 <label class="control-label" for="name">Name</label>
                 <div class="controls">
-                    <h:inputText id="name" value="#{registerMB.name}"/>
+                    <h:inputText id="name" value="#{registerMB.name}" label="Name">
+                        <f:validateLength minimum="1" maximum="100"/>
+                    </h:inputText>
+                        
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="login">Login</label>
                 <div class="controls">
-                    <h:inputText id="login" value="#{registerMB.login}"/>
+                    <h:inputText id="login" value="#{registerMB.login}" label="Login">
+                        <f:validateLength minimum="1" maximum="50"/>
+                    </h:inputText>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="password">Password</label>
                 <div class="controls">
-                    <h:inputSecret id="password" value="#{registerMB.password}"/>
+                    <h:inputSecret id="password" value="#{registerMB.password}" label="Password">
+                        <f:validateLength minimum="1" maximum="50"/>
+                    </h:inputSecret>
                 </div>
             </div>
             <div class="control-group">
@@ -49,10 +62,10 @@
                         <t:inputFileUpload id="file" value="#{registerMB.file}" style="display: none"/>                        
                         <div id="photo" class="input-append">
                             <input id="photoCover" readonly="readonly" class="input-large" type="text"/>
-                           <a class="btn" onclick="$('input[id=regForm\\:file]').click();">Browse</a>
+                           <a class="btn" onclick="$('#regForm\\:file').click();">Browse</a>
                         </div>
                         <script type="text/javascript">
-                            $('input[id=regForm\\:file]').change(function() {
+                            $('#regForm\\:file').change(function() {
                                $('#photoCover').val($(this).val());
                             });
                         </script>
