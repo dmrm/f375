@@ -35,6 +35,7 @@ public class Requests {
         ru.ifmo.pe.oatmeal.model.Request reqst = req.find(rId);
         aff.setDescription(reqst.getText());
         aff.setOwner(userDAO.find(user));
+        aff.setProgress(0);
         affiars.save(aff);
         deleteRequest(rId);
     }

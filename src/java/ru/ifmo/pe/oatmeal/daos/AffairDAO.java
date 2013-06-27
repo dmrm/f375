@@ -26,7 +26,7 @@ public class AffairDAO {
     private EntityManager em;
     
     public void save(Affair affair){
-        em.persist(affair);
+        em.merge(affair);
     }
     
     public Affair find(long id){

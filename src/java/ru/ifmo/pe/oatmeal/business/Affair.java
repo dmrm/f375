@@ -47,6 +47,7 @@ public class Affair {
         ru.ifmo.pe.oatmeal.model.Affair affair = new ru.ifmo.pe.oatmeal.model.Affair();     
         affair.setOwner(userDAO.find(user));
         affair.setDescription(description);
+        affair.setProgress(0);
         affairDAO.save(affair);
     }
 
@@ -106,6 +107,10 @@ public class Affair {
             users.add(userDAO.find(user));
         }
         return users;
-    }  
+    }
+    
+    public void saveAffair(ru.ifmo.pe.oatmeal.model.Affair affair){
+        affairDAO.save(affair);
+    }
     
 }

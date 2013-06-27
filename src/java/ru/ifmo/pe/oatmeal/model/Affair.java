@@ -16,19 +16,21 @@ import javax.persistence.ManyToOne;
  * @author D
  */
 @Entity
-public class Affair implements Serializable{
-    
-    @Id @GeneratedValue
+public class Affair implements Serializable {
+
+    @Id
+    @GeneratedValue
     private long id;
     @ManyToOne
     private User owner;
-    @Column(nullable=false, length=1000)
+    @Column(nullable = false, length = 1000)
     private String description;
+    @Column(nullable = false)
+    private Integer progress;
 
     public Affair() {
-    
     }
-    
+
     public long getId() {
         return id;
     }
@@ -52,5 +54,12 @@ public class Affair implements Serializable{
     public void setOwner(User owner) {
         this.owner = owner;
     }
-    
+
+    public Integer getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Integer progress) {
+        this.progress = progress;
+    }
 }

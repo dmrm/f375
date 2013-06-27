@@ -4,127 +4,150 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:t="http://myfaces.apache.org/tomahawk">
-    
+
     <f:metadata>
         <f:viewParam name="id" value="#{affairMB.id}"/>
         <f:event type="preRenderView" listener="#{affairMB.init()}" />
     </f:metadata>
-        
- 
+
+
     <ui:define name="tempTitle">Affairs</ui:define>   
 
     <ui:define name="tempBody">    
         <script>
             document.getElementById("affair").className += 'active';
         </script>
-            <div class="container-fluid" style="margin: 40px 0px;">
-                <div class="row-fluid">
-                    <div class="span6 offset1">
-                        <div class="row-fluid">
-                            <div class="span4">
-                                <h:graphicImage class="decor_block" name="imgs/folder.png"/>
-                            </div>
+        <div class="container-fluid" style="margin: 40px 0px;">
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <h:graphicImage class="decor_block" name="imgs/folder.png"/>
+                        </div>
+                        <div class="span8">
+                            <h3 style="font-weight: 100;">Affair ##{affairMB.affair.id}</h3>
+                            <h:outputLabel value="It's your affair." rendered="#{usersMB.currentUser() == affairMB.affair.owner.login}"/>
+                            <h:outputLabel value="It's affair of #{affairMB.affair.owner.name}." rendered="#{usersMB.currentUser() != affairMB.affair.owner.login}"/>
+                        </div>
+                        <h:form>
                             <div class="span8">
-                                <h3 style="font-weight: 100;">Affair ##{affairMB.affair.id}</h3>
-                                <h:outputLabel value="It's your affair." rendered="#{usersMB.currentUser() == affairMB.affair.owner.login}"/>
-                                <h:outputLabel value="It's affair of #{affairMB.affair.owner.name}." rendered="#{usersMB.currentUser() != affairMB.affair.owner.login}"/>
+                                <h:outputLabel value="Progress: " for="prog"/>
+                                <h:outputText  value="#{affairMB.affair.progress}" rendered="#{usersMB.currentUser() != affairMB.affair.owner.login}">
+                                    <f:convertNumber type="percent" />
+                                </h:outputText>
+
+                                <h:inputText id="prog" value="#{affairMB.affair.progress}" required="true" maxlength="3"
+                                             rendered="#{affairMB.isRendered()}">                         
+                                    <f:convertNumber integerOnly="true" minIntegerDigits="0" maxIntegerDigits="100"/>
+                                    <f:validateLongRange minimum="0" maximum="100"/>
+                                </h:inputText>
+                               
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class="btn-group">
+                                            <h:commandButton class="btn btn-primary" action="#{affairMB.saveProgress}" value="Save"
+                                                             rendered="#{usersMB.currentUser() == affairMB.affair.owner.login}"/>
+                                        </div>
+                                    </div>
+                                </div>   
                             </div>
+                        </h:form>
+                    </div>
+                    <br/>
+                    <div class="row-fluid decor_block">
+                        <div class ="row-fluid">
+                            <div class="span10">
+                                <h3 style="margin: 0px 10px; font-weight: 100">Evidences</h3>
+                            </div>
+                            <div class="span2">
+                                <button class="btn btn-primary pull-right" onclick="document.getElementById('eviContainer').style.display = 'block'">Add</button>
+                            </div>                                
                         </div>
-                        <br/>
-                        <div class="row-fluid decor_block">
-                            <div class ="row-fluid">
-                                <div class="span10">
-                                    <h3 style="margin: 0px 10px; font-weight: 100">Evidences</h3>
-                                </div>
-                                <div class="span2">
-                                    <button class="btn btn-primary pull-right" onclick="document.getElementById('eviContainer').style.display = 'block'">Add</button>
-                                </div>                                
-                            </div>
-                            <legend></legend>     
-                            <div>
-                                <ui:repeat value="#{affairMB.evidences}" var="evi">
-                                    <h:outputLink class="span1" value="/Oatmeal#{evi.eviPath}">#{evi.id}</h:outputLink>
-                                </ui:repeat>
-                            </div>
-                        </div>
-                        <br/>
-                        <div class="row-fluid decor_block">
-                            <div class ="row-fluid">
-                                <div class="span9">
-                                    <h3 style="margin: 0px 10px; font-weight: 100">Users</h3>
-                                </div>
-                                <div class="span3">
-                                    <button onclick="getElementById('usrContainer').style.display = 'block';" class="btn btn-primary pull-right">Add</button>
-                                </div>                                
-                            </div>
-                            <legend></legend> 
-                            <div>
-                                <ui:repeat value="#{affairMB.users}" var="user">
-                                    #{user.name}<br/>
-                                </ui:repeat>
-                            </div>
+                        <legend></legend>     
+                        <div>
+                            <ui:repeat value="#{affairMB.evidences}" var="evi">
+                                <h:outputLink class="span1" value="/Oatmeal#{evi.eviPath}">#{evi.id}</h:outputLink>
+                            </ui:repeat>
                         </div>
                     </div>
-                    <div class="span3 offset1">
-                        <div class="decor_block">
-                            <h:form>
-                                <br/>
-                                <div class="row-fluid">
-                                    <h:inputTextarea class="span10 offset1"/>
-                                </div>
-                                <div class="row-fluid">
-                                    <h:commandButton class="btn span3 offset8" value="Send"/>
-                                </div>
-                            </h:form>
+                    <br/>
+                    <div class="row-fluid decor_block">
+                        <div class ="row-fluid">
+                            <div class="span9">
+                                <h3 style="margin: 0px 10px; font-weight: 100">Users</h3>
+                            </div>
+                            <div class="span3">
+                                <button onclick="getElementById('usrContainer').style.display = 'block';" class="btn btn-primary pull-right">Add</button>
+                            </div>                                
                         </div>
-                        <br/>
-                        <div class="decor_block">
-                            <h3 style="margin: 0px 10px; font-weight: 100">Messages</h3>
-                            <legend></legend>
+                        <legend></legend> 
+                        <div>
+                            <ui:repeat value="#{affairMB.users}" var="user">
+                                #{user.name}<br/>
+                            </ui:repeat>
                         </div>
                     </div>
                 </div>
-            </div> 
+                <div class="span3 offset1">
+                    <div class="decor_block">
+                        <h:form>
+                            <br/>
+                            <div class="row-fluid">
+                                <h:inputTextarea class="span10 offset1"/>
+                            </div>
+                            <div class="row-fluid">
+                                <h:commandButton class="btn span3 offset8" value="Send"/>
+                            </div>
+                        </h:form>
+                    </div>
+                    <br/>
+                    <div class="decor_block">
+                        <h3 style="margin: 0px 10px; font-weight: 100">Messages</h3>
+                        <legend></legend>
+                    </div>
+                </div>
+            </div>
+        </div> 
         <div id="eviContainer" class="popup-container">
-             <!--onclick="document.getElementById('popup-container').style.display = 'none'"-->
+            <!--onclick="document.getElementById('popup-container').style.display = 'none'"-->
             <div class="container-fluid" id="choose-evi">                
                 <div class="row-fluid">
                     <div id="eviBlock" class="span6 offset3 popup-block decor_block">                        
                         <h3 style="margin: 0px 10px; font-weight: 100">Load evidence</h3>
                         <legend></legend>                        
-                            <h:form id="eviForm" class="form-horizontal" enctype="multipart/form-data">   
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <t:inputFileUpload id="file" value="#{evidenceMB.file}" style="display: none"/>                        
-                                                <div id="photo" class="input-append">
-                                                   <input id="photoCover" readonly="readonly" type="text"/>
-                                                   <a class="btn" onclick="$('input[id=eviForm\\:file]').click();">Browse</a>
-                                                </div>
-                                                <script type="text/javascript">
-                                                    $('input[id=eviForm\\:file]').change(function() {
-                                                       $('#photoCover').val($(this).val());
-                                                    });
-                                                </script>                                     
+                        <h:form id="eviForm" class="form-horizontal" enctype="multipart/form-data">   
+                            <div class="container">
+                                <div class="row">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <t:inputFileUpload id="file" value="#{evidenceMB.file}" style="display: none"/>                        
+                                            <div id="photo" class="input-append">
+                                                <input id="photoCover" readonly="readonly" type="text"/>
+                                                <a class="btn" onclick="$('input[id=eviForm\\:file]').click();">Browse</a>
+                                            </div>
+                                            <script type="text/javascript">
+            $('input[id=eviForm\\:file]').change(function() {
+                $('#photoCover').val($(this).val());
+            });
+                                            </script>                                     
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <h:inputTextarea value="#{evidenceMB.description}"/>
+                                        </div>
+                                    </div> 
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <div class="btn-group">
+                                                <h:commandButton class="btn btn-primary" action="#{evidenceMB.loadEvi(affairMB.id)}" value="Add"/>
+                                                <h:commandButton class="btn" type="reset" onclick="document.getElementById('eviContainer').style.display = 'none'" value="Cancel"/>
                                             </div>
                                         </div>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <h:inputTextarea value="#{evidenceMB.description}"/>
-                                            </div>
-                                        </div> 
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <div class="btn-group">
-                                                    <h:commandButton class="btn btn-primary" action="#{evidenceMB.loadEvi(affairMB.id)}" value="Add"/>
-                                                    <h:commandButton class="btn" type="reset" onclick="document.getElementById('eviContainer').style.display = 'none'" value="Cancel"/>
-                                                </div>
-                                            </div>
-                                        </div>                                        
-                                    </div>
+                                    </div>                                        
                                 </div>
-                            </h:form>
+                            </div>
+                        </h:form>
                     </div>
                 </div>
             </div>
