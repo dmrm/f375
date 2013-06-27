@@ -76,7 +76,9 @@
                             <h:form>
                                 <br/>
                                 <div class="row-fluid">
-                                    <h:inputTextarea class="span10 offset1"/>
+                                    <h:inputTextarea class="span10 offset1" label="Message">
+                                        <f:validateLength minimum="1" maximum="1000"/>
+                                    </h:inputTextarea>
                                 </div>
                                 <div class="row-fluid">
                                     <h:commandButton class="btn span3 offset8" value="Send"/>
@@ -103,7 +105,7 @@
                                     <div class="row">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <t:inputFileUpload id="file" value="#{evidenceMB.file}" style="display: none">
+                                                <t:inputFileUpload id="file" value="#{evidenceMB.file}" style="display: none" label="File">
                                                     <f:validator validatorId="fileValidator"/>
                                                 </t:inputFileUpload>                        
                                                 <div id="photo" class="input-append">
@@ -119,7 +121,7 @@
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
-                                                <h:inputTextarea value="#{evidenceMB.description}">
+                                                <h:inputTextarea value="#{evidenceMB.description}" label="description">
                                                     <f:validateLength maximum="1000"/>
                                                 </h:inputTextarea>
                                             </div>

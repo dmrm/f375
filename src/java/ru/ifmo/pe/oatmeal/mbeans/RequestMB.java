@@ -53,7 +53,7 @@ public class RequestMB {
             r.setText(text);
             req.saveRequest(r);
         } else {
-            affair.createAffair(text, "moriarty");
+            affair.createAffair(text, person.findLessBusyUser());
         }
     }
     
