@@ -5,9 +5,11 @@
 package ru.ifmo.pe.oatmeal.mbeans;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import ru.ifmo.pe.oatmeal.business.Affair;
@@ -19,7 +21,8 @@ import ru.ifmo.pe.oatmeal.model.User;
  * @author D
  */
 @ManagedBean
-public class AffairMB {
+@ViewScoped
+public class AffairMB implements Serializable{
     
     @EJB
     private Affair affairBusiness;    

@@ -41,7 +41,7 @@
         <realm-name>oatmealRealm</realm-name>
         <form-login-config>
             <form-login-page>/login.xhtml</form-login-page>
-            <form-error-page>/login?err=true.xhtml</form-error-page>
+            <form-error-page>/login.xhtml?err=true</form-error-page>
         </form-login-config>
     </login-config>
 <!--    <security-constraint>

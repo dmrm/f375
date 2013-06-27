@@ -8,8 +8,10 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 import ru.ifmo.pe.oatmeal.business.Affair;
@@ -19,7 +21,8 @@ import ru.ifmo.pe.oatmeal.business.Affair;
  * @author D
  */
 @ManagedBean
-public class EvidenceMB {
+@ViewScoped
+public class EvidenceMB implements Serializable{
     
     @EJB
     private Affair affair;
@@ -72,6 +75,5 @@ public class EvidenceMB {
         bos.flush();
         bos.close();
         return refPath + path;
-    }
-    
+    }    
 }

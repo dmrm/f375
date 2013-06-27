@@ -16,6 +16,7 @@ import ru.ifmo.pe.oatmeal.model.Evidence;
  *
  * @author D
  */
+
 @Stateless
 public class EvidenceDAO {
     

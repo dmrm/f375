@@ -40,7 +40,13 @@
                                     <button class="btn btn-primary pull-right" onclick="document.getElementById('eviContainer').style.display = 'block'">Add</button>
                                 </div>                                
                             </div>
-                            <legend></legend>     
+                            <legend></legend>
+                            <h:panelGroup layout="block" id="errMessage" class="alert alert-error" rendered="#{facesContext.validationFailed}">
+                                <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">
+                                   ×
+                                </button>
+                                <h:messages style="margin: 0px 15px"/>
+                            </h:panelGroup>
                             <div>
                                 <ui:repeat value="#{affairMB.evidences}" var="evi">
                                     <h:outputLink class="span1" value="/Oatmeal#{evi.eviPath}">#{evi.id}</h:outputLink>
@@ -85,8 +91,8 @@
                     </div>
                 </div>
             </div> 
-        <div id="eviContainer" class="popup-container">
-             <!--onclick="document.getElementById('popup-container').style.display = 'none'"-->
+        <div layout="block" id="eviContainer" class="popup-container">
+             <!--onclick="document.getElementById('popup-container').style.display = 'none'"-->            
             <div class="container-fluid" id="choose-evi">                
                 <div class="row-fluid">
                     <div id="eviBlock" class="span6 offset3 popup-block decor_block">                        
@@ -97,7 +103,9 @@
                                     <div class="row">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <t:inputFileUpload id="file" value="#{evidenceMB.file}" style="display: none"/>                        
+                                                <t:inputFileUpload id="file" value="#{evidenceMB.file}" style="display: none">
+                                                    <f:validator validatorId="fileValidator"/>
+                                                </t:inputFileUpload>                        
                                                 <div id="photo" class="input-append">
                                                    <input id="photoCover" readonly="readonly" type="text"/>
                                                    <a class="btn" onclick="$('input[id=eviForm\\:file]').click();">Browse</a>
@@ -111,7 +119,9 @@
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
-                                                <h:inputTextarea value="#{evidenceMB.description}"/>
+                                                <h:inputTextarea value="#{evidenceMB.description}">
+                                                    <f:validateLength maximum="1000"/>
+                                                </h:inputTextarea>
                                             </div>
                                         </div> 
                                         <div class="control-group">
@@ -128,7 +138,7 @@
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>   
         <div id="usrContainer" class="popup-container">
             <div class="container-fluid" id="choose-evi">                
                 <div class="row-fluid">

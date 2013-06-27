@@ -24,7 +24,9 @@
             <div class="control-group">
                 <h:outputLabel class="control-label" for="textarea" value="Request text: "/> 
                 <div class="controls">
-                    <h:inputTextarea id="textarea" value="#{requestMB.text}"/>
+                    <h:inputTextarea id="textarea" value="#{requestMB.text}">
+                        <f:validateLength maximum="1000"/>
+                    </h:inputTextarea>
                 </div>
             </div>
             <div class="control-group">

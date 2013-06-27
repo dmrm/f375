@@ -59,7 +59,9 @@
                 <label class="control-label" for="photo">Photo</label>
                 <div class="controls">
                     <div class="input-append">
-                        <t:inputFileUpload id="file" value="#{registerMB.file}" style="display: none"/>                        
+                        <t:inputFileUpload id="file" value="#{registerMB.file}" style="display: none">
+                            <f:validator validatorId="imageValidator"/>
+                        </t:inputFileUpload>                      
                         <div id="photo" class="input-append">
                             <input id="photoCover" readonly="readonly" class="input-large" type="text"/>
                            <a class="btn" onclick="$('#regForm\\:file').click();">Browse</a>

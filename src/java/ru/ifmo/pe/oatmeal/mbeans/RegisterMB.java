@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 import ru.ifmo.pe.oatmeal.business.Person;
 import ru.ifmo.pe.oatmeal.model.Group;
@@ -30,7 +29,7 @@ public class RegisterMB {
     
     private static final String photoPath = "files/users_p/";
     private static final String refPath = "/users_p/";
-    
+            
     private String name;
     private String login;
     private String password;
@@ -87,16 +86,14 @@ public class RegisterMB {
     }
         
     public void registerUser() throws IOException{
-        String userName = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName(); 
         String fileName = file.getName();
         byte[] byteImg = file.getBytes();
         photo = saveFile(fileName, byteImg);
         List<Group> roleList = new ArrayList<Group>();
         roleList.add(defineRole(role));
         person.saveUser(new User(name, login, password, photo, roleList));
-       // return "register.xhtml?register=success";
     }
-    
+        
     private String saveFile(String fileName, byte[] byteImg) throws IOException{
         photo = login + "_" + fileName;
         File f = new File(photoPath);
@@ -118,6 +115,5 @@ public class RegisterMB {
         } else {
             return Group.OUSER;
         }
-    }
-    
+    }    
 }
