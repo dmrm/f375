@@ -4,6 +4,7 @@
  */
 package ru.ifmo.pe.oatmeal.mbeans;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import ru.ifmo.pe.oatmeal.business.Requests;
@@ -13,17 +14,19 @@ import ru.ifmo.pe.oatmeal.business.Requests;
  * @author s149297
  */
 @ManagedBean
-public class RequestsMB {
+public class RequestsMB implements Serializable{
+    private static final long serialVersionUID = 1L;
     
     @EJB
-    private Requests reqs;
+    private transient Requests reqs;
     
-    public void acceptRequest(long reqId){
-        reqs.acceptRequest(reqId);
+    public String acceptRequest(long reqId){
+        return "requests.xhtml?id=" + reqs.acceptRequest(reqId) + "&faces-redirect=true";
     }
     
-    public void declineRequest(long reqId){
+    public String declineRequest(long reqId){
         reqs.deleteRequest(reqId);
+        return "requests.xhtml?ignored=true&faces-redirect=true";
     }
     
 }

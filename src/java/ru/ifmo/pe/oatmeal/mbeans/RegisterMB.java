@@ -8,6 +8,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -22,10 +23,11 @@ import ru.ifmo.pe.oatmeal.model.User;
  * @author D
  */
 @ManagedBean
-public class RegisterMB {
+public class RegisterMB implements Serializable{
+    private static final long serialVersionUID = 1L;
     
     @EJB
-    private Person person;
+    private transient Person person;
     
     private static final String photoPath = "files/users_p/";
     private static final String refPath = "/users_p/";

@@ -17,20 +17,22 @@ import ru.ifmo.pe.oatmeal.model.Message;
 */
 @ManagedBean
 public class MessageMB implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Message message;
     private List<Message> listMessage;
     private long id;
     private String text;
     @EJB
-    MessageLogic messageLogic;
+    private transient MessageLogic messageLogic;
 
     public List<Message> getMessages(long affairId){
         return messageLogic.getMessagesAttachedAffair(affairId);
     }
     
-    public void newMessage(long affairId){
+    public String newMessage(long affairId){
         messageLogic.save(affairId, text);
+        return "affair.xhtml?id=" + affairId + "&faces-redirect=true";
     }
     
     public List<Message> getUserRelatedMessages(){

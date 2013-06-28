@@ -4,6 +4,7 @@
  */
 package ru.ifmo.pe.oatmeal.mbeans;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import ru.ifmo.pe.oatmeal.business.Person;
@@ -13,10 +14,11 @@ import ru.ifmo.pe.oatmeal.business.Person;
  * @author D
  */
 @ManagedBean
-public class AnonRequestMB {
+public class AnonRequestMB implements Serializable{
+    private static final long serialVersionUID = 1L;
     
     @EJB
-    private Person person;
+    private transient Person person;
     
     private String text;
     

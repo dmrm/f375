@@ -111,12 +111,12 @@ public class Affair {
     public Evidence evi(long eviId){
         return eviDAO.find(eviId);
     }
-//
-//    public User user(long affairId, String user) {
-//        User u = userDAO.find(user);
-//        ru.ifmo.pe.oatmeal.model.Affair a = affairDAO.find(affairId);
-//        return u.;
-//    }
+
+    public void updateAffair(long id, String description){
+        ru.ifmo.pe.oatmeal.model.Affair a = affairDAO.find(id);
+        a.setDescription(description);
+        affairDAO.update(a);
+    }
 
     public User getUser(String userId) {
         return userDAO.find(userId);

@@ -1,7 +1,13 @@
 <ui:composition template="/WEB-INF/templates/laftemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core">
+    
+    <f:metadata>
+        <f:viewParam name="id"/>
+        <f:viewParam name="ignored"/>
+    </f:metadata>
     
     <ui:define name="tempTitle">Request</ui:define>
     
@@ -9,6 +15,19 @@
         <script>
             document.getElementById("requests").className += 'active';
         </script>
+        <br/>
+        <h:panelGroup layout="block" id="ignoredMessage" class="alert alert-info span10 offset1" rendered="#{ignored}">
+            <button class="close" data-dismiss="alert" type="button" onclick="getElementById('ignoredMessage').style.display = 'none'">
+                ×
+            </button>
+            Request declined
+        </h:panelGroup>
+        <h:panelGroup layout="block" id="acceptedMessage" class="alert alert-success span10 offset1" rendered="#{not empty id}">
+            <button class="close" data-dismiss="alert" type="button" onclick="getElementById('acceptedMessage').style.display = 'none'">
+                ×
+            </button>
+            Request accepted. Affair <h:link outcome="affair.xhtml?id=#{affairMB.getAffairById(id).id}">##{affairMB.getAffairById(id).id}</h:link> is opened
+        </h:panelGroup>        
         <div style="margin-top: 40px" class="container-fluid">
             <div class="row-fluid"> 
                <div class="span10 offset1 decor_block">
@@ -29,7 +48,7 @@
                                         <h:form>
                                             <span class="btn-group">
                                                 <h:commandButton action="#{requestsMB.acceptRequest(req.id)}" class="btn btn-primary" value="Accept"/>
-                                                    <h:commandButton action="#{requestsMB.declineRequest(req.id)}" class="btn" value="Decline"/>
+                                                <h:commandButton action="#{requestsMB.declineRequest(req.id)}" class="btn" value="Decline"/>
                                             </span>
                                         </h:form>
                                     </td>

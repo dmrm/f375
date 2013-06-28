@@ -4,6 +4,7 @@
  */
 package ru.ifmo.pe.oatmeal.mbeans;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
@@ -14,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
  * @author D
  */
 @ManagedBean
-public class LoginMB {
+public class LoginMB implements Serializable{
+    private static final long serialVersionUID = 1L;
     
     private boolean err = false;
     private String login;

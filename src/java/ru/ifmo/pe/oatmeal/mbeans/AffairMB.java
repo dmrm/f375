@@ -22,10 +22,11 @@ import ru.ifmo.pe.oatmeal.model.User;
  */
 @ManagedBean
 @ViewScoped
-public class AffairMB implements Serializable{
+public class AffairMB implements Serializable{    
+    private static final long serialVersionUID = 1L;
     
     @EJB
-    private Affair affairBusiness;    
+    private transient Affair affairBusiness;    
     
     private ru.ifmo.pe.oatmeal.model.Affair affair;
     private Evidence evi;
@@ -34,6 +35,7 @@ public class AffairMB implements Serializable{
     private long id;
     private long eviId;
     private String userId;
+    private String description;
     
     public void init() throws IOException{
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -54,7 +56,6 @@ public class AffairMB implements Serializable{
     
     private User checkUser(List<User> users, User user){
         for(User u : users){
-            System.out.println(u.getLogin());
             if(u.getLogin().equals(user.getLogin())){
                 return user;
             }
@@ -125,6 +126,28 @@ public class AffairMB implements Serializable{
 
     public void setUser(User user) {
         this.user = user;
+    }    
+    
+    public ru.ifmo.pe.oatmeal.model.Affair getAffairById(long id){
+        String user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        return affairBusiness.affairByIdAndUser(user, id);
+    }
+    
+    public String updateDescription(){
+        if(description == null){
+            return affair.getDescription();
+        } else {
+            affairBusiness.updateAffair(id, description);
+            return description;
+        }
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
 }

@@ -25,8 +25,13 @@ public class AffairDAO {
     @PersistenceContext
     private EntityManager em;
     
-    public void save(Affair affair){
+    public long save(Affair affair){
         em.persist(affair);
+        return affair.getId();
+    }
+    
+    public void update(Affair affair){
+        em.merge(affair);
     }
     
     public Affair find(long id){

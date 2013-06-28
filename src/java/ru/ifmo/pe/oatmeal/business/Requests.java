@@ -29,14 +29,15 @@ public class Requests {
         req.remove(rId);
     }
     
-    public void acceptRequest(long rId){
+    public long acceptRequest(long rId){
         ru.ifmo.pe.oatmeal.model.Affair aff = new ru.ifmo.pe.oatmeal.model.Affair();
         String user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         ru.ifmo.pe.oatmeal.model.Request reqst = req.find(rId);
         aff.setDescription(reqst.getText());
         aff.setOwner(userDAO.find(user));
-        affiars.save(aff);
+        long affairId = affiars.save(aff);
         deleteRequest(rId);
+        return affairId;
     }
     
 }

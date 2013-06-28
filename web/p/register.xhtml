@@ -35,7 +35,7 @@
             </button>
             <h:messages style="margin: 0px 15px"/>
         </h:panelGroup>
-        <h:form id="regForm" class="form-horizontal" enctype="multipart/form-data">
+        <h:form prependId="false" id="regForm" class="form-horizontal" enctype="multipart/form-data">
             <div class="control-group">
                 <label class="control-label" for="name">Name</label>
                 <div class="controls">
@@ -81,12 +81,12 @@
                         </t:inputFileUpload>                      
                         <div id="photo" class="input-append">
                             <input id="photoCover" readonly="readonly" class="input-large" type="text"/>
-                           <a class="btn" onclick="$('#regForm\\:file').click();">Browse</a>
+                           <a class="btn" onclick="$('#file').click();">Browse</a>
                         </div>
                         <script type="text/javascript">
-                            $('#regForm\\:file').change(function() {
+                            $('#file').change(function() {
                                $('#photoCover').val($(this).val());
-                            });
+                            });             
                         </script>
                     </div>
                 </div>

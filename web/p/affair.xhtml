@@ -18,7 +18,27 @@
     <ui:define name="tempBody">    
         <script>
             document.getElementById("affair").className += 'active';
+            function edit(){
+                document.getElementById('edit').style.display = 'none'; 
+                document.getElementById('editor').style.display = 'block'; 
+                var desc = document.getElementById('desc');
+                var editarea = document.getElementById('editarea');                
+                desc.style.display = 'none';    
+                editarea.innerHTML = desc.innerHTML;
+            }
+            function save(){
+                document.getElementById('edit').style.display = 'block'; 
+                document.getElementById('editor').style.display = 'none';
+            }
         </script>
+        <style>
+            .row-fluid [class="span1"]:nth-child(12n+1) {
+                margin-left: 0;                                             
+            }
+            .row-fluid [class="span2"]:nth-child(12n+1) {
+                margin-left: 0;                                             
+            }
+        </style>
         <h:panelGroup layout="block" id="userMessage" class="alert alert-success" rendered="#{not empty affairMB.userId and not empty affairMB.user}">
                 <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('userMessage').style.display = 'none'">
                    ×
@@ -46,8 +66,20 @@
                             </div>
                             <div class="span8">
                                 <h3 style="font-weight: 100;">Affair ##{affairMB.affair.id}</h3>
-                                <h:outputLabel value="It's your affair." rendered="#{usersMB.currentUser() == affairMB.affair.owner.login}"/>
-                                <h:outputLabel value="It's affair of #{affairMB.affair.owner.name}." rendered="#{usersMB.currentUser() != affairMB.affair.owner.login}"/>
+                                <i><h:outputLabel value="It's your affair." rendered="#{usersMB.currentUser() == affairMB.affair.owner.login}"/></i>
+                                <i><h:outputLabel value="It's affair of #{affairMB.affair.owner.name}." rendered="#{usersMB.currentUser() != affairMB.affair.owner.login}"/></i>
+                                <h:form prependId="false">
+                                    <h:outputText id="desc"  value="#{affairMB.updateDescription()}"/>
+                                    <a id="edit" onclick="edit();">
+                                        edit..
+                                    </a>
+                                    <div id="editor"  style="display: none">
+                                    <h:inputTextarea id="editarea" value="#{affairMB.description}" style="width: 100%"/>
+                                    <h:commandLink id="save" onclick="save();" value="save..">
+                                        <f:ajax execute="editarea" render="desc"/>
+                                    </h:commandLink>                                        
+                                    </div>
+                                </h:form>                                
                             </div>
                         </div>
                         <br/>
@@ -60,11 +92,14 @@
                                     <button class="btn btn-primary pull-right" onclick="document.getElementById('eviContainer').style.display = 'block'">Add</button>
                                 </div>                                
                             </div>
-                            <legend></legend>                            
-                            <div>
-                                <ui:repeat value="#{affairMB.evidences}" var="evi">
-                                    <h:outputLink class="span1" value="/Oatmeal#{evi.eviPath}">#{evi.id}</h:outputLink>
-                                </ui:repeat>
+                            <legend></legend>
+                            <div class="container-fluid">
+                                <div class="row-fluid">
+                                    <!--<a style="display: none"/>-->
+                                    <ui:repeat value="#{affairMB.evidences}" var="evi">                                    
+                                            <h:outputLink class="span1" value="/Oatmeal#{evi.eviPath}" style="text-decoration: none"><abbr title="#{evi.description}">#{evi.id}</abbr></h:outputLink>                                    
+                                    </ui:repeat>
+                                </div>
                             </div>
                         </div>
                         <br/>
@@ -78,10 +113,15 @@
                                 </div>                                
                             </div>
                             <legend></legend>                            
-                            <div>
-                                <ui:repeat value="#{affairMB.users}" var="user">
-                                    #{user.name}<br/>
-                                </ui:repeat>
+                            <div class="container-fluid">
+                                <div class="row-fluid">
+                                    <ui:repeat value="#{affairMB.users}" var="user">
+                                        <div class="span2" style="text-align: center">
+                                            <h:graphicImage value="#{user.photo}" class="img-rounded"/>
+                                            #{user.name}<br/>
+                                        </div>
+                                    </ui:repeat>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -195,7 +235,7 @@
                                     </ui:repeat>
                                 </div>
                             </div>
-                            <h:commandButton class="btn span2 offset1" type="reset" style="margin-bottom: 10px" onclick="getElementById('usrContainer').style.display = 'none';" value="Cancel"/>
+                            <h:commandButton class="btn span2 offset1" type="reset" style="margin-left: 20px" onclick="getElementById('usrContainer').style.display = 'none';" value="Cancel"/>
                         </h:form>
                     </div>
                 </div>

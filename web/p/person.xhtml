@@ -36,14 +36,31 @@
                             </div>
                             <legend></legend>
                             <style>
-                                .row-fluid [class*="span1"]:nth-child(12n+1) {
+                                .row-fluid [class="span1"]:nth-child(12n+1) {
                                     margin-left: 0;                                             
                                 }
                             </style>
                             <div>
                                 <div class="container-fluid">
                                     <div class="row-fluid">   
-                                        <ui:repeat value="#{personMB.affairs}" var="affair">                                            
+                                        <ui:repeat value="#{personMB.affairs}" var="affair">                                               
+                                            <div class="span1" style="text-align: center"> 
+                                                <h:link outcome="affair.xhtml?id=#{affair.id}">                                                                              
+                                                    <h:graphicImage name="/imgs/folder.png"/>   
+                                                    <span style="left: 50%; top: 50%">##{affair.id}</span>
+                                                </h:link>
+                                            </div>  
+                                        </ui:repeat>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <br/>
+                            <h:panelGroup layout="block" rendered="#{personMB.guestAffairs.size() != 0}">
+                                <h5 style="margin: 0px 5px">You were invited to the following affairs:</h5>
+                                <legend></legend>
+                                <div class="container-fluid">
+                                    <div class="row-fluid">                                        
+                                        <ui:repeat value="#{personMB.guestAffairs}" var="affair">                                            
                                             <div class="span1" style="text-align: center">  
                                                 <h:link outcome="affair.xhtml?id=#{affair.id}">                                                                              
                                                     <h:graphicImage name="/imgs/folder.png"/>   
@@ -51,23 +68,9 @@
                                                 </h:link>
                                             </div>                                                
                                         </ui:repeat>
-                                    </div>                                    
-                                </div>
-                                <div class="container-fluid">
-                                      <div class="row-fluid">
-                                        <h5 style="margin: 0px 5px">You were invited to the following affairs:</h5>
-                                        <legend></legend>
-                                            <ui:repeat value="#{personMB.guestAffairs}" var="affair">                                            
-                                                <div class="span1" style="text-align: center">  
-                                                    <h:link outcome="affair.xhtml?id=#{affair.id}">                                                                              
-                                                        <h:graphicImage name="/imgs/folder.png"/>   
-                                                        <span style="left: 50%; top: 50%">##{affair.id}</span>
-                                                    </h:link>
-                                                </div>                                                
-                                            </ui:repeat>
-                                        </div>
                                     </div>
-                            </div>
+                                </div>                            
+                            </h:panelGroup>
                         </div>
                     </div>
                     <div class="span3 offset1 decor_block">
@@ -100,12 +103,22 @@
                     </div>
                 </div>
             </div>
-        </h:panelGroup> 
-        <h:panelGroup layout="block" rendered="#{request.isUserInRole('OUSER')}">
-            
-        </h:panelGroup> 
-        <h:panelGroup layout="block" rendered="#{request.isUserInRole('REGISTRAR')}">
-            
+        </h:panelGroup>
+        <h:panelGroup layout="block" rendered="#{!request.isUserInRole('DETECTIVE') and !request.isUserInRole('PRIVATE_EYE')}">
+            <div class="container-fluid" style="margin: 40px 0px">
+                <div class="row-fluid">
+                    <div class="span6 offset1">
+                        <div class="row-fluid">
+                            <div class="span4">
+                                <h:graphicImage class="decor_block" value="#{personMB.photo}"/>
+                            </div>
+                            <div class="span8">
+                                <h3 style="font-weight: 100;">#{personMB.person}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </h:panelGroup> 
     </ui:define>
 </ui:composition>

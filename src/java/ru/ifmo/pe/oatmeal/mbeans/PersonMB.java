@@ -5,6 +5,7 @@
 package ru.ifmo.pe.oatmeal.mbeans;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -18,12 +19,13 @@ import ru.ifmo.pe.oatmeal.model.Affair;
  * @author D
  */
 @ManagedBean
-public class PersonMB {
+public class PersonMB implements Serializable{
+    private static final long serialVersionUID = 1L;
     
     @EJB
-    private Person person;
+    private transient Person person;
     @EJB
-    private ru.ifmo.pe.oatmeal.business.Affair affair;
+    private transient ru.ifmo.pe.oatmeal.business.Affair affair;
     
     public String getPerson(){
         return person.getUserName();
@@ -39,8 +41,9 @@ public class PersonMB {
         ec.redirect("../login.xhtml");
     }
     
-    public void createAffair(){
+    public String createAffair(){
         affair.createAffair(null);
+        return "person.xhtml?faces-redirect=true";
     }
     
     public List<Affair> getAffairs(){

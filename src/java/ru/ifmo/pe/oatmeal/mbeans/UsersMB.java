@@ -4,6 +4,7 @@
  */
 package ru.ifmo.pe.oatmeal.mbeans;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -16,10 +17,11 @@ import ru.ifmo.pe.oatmeal.model.User;
  * @author D
  */
 @ManagedBean
-public class UsersMB {
+public class UsersMB implements Serializable{
+    private static final long serialVersionUID = 1L;
     
     @EJB
-    private Person person;
+    private transient Person person;
     
     public List<User> getUsers(){
         return person.getUsers();

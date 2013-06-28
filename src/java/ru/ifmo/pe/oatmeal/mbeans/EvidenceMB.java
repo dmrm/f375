@@ -25,9 +25,10 @@ import ru.ifmo.pe.oatmeal.business.Affair;
 @ManagedBean
 @ViewScoped
 public class EvidenceMB implements Serializable{
+    private static final long serialVersionUID = 1L;
     
     @EJB
-    private Affair affair;
+    private transient Affair affair;
     
     private static final String eviPath = "files/evis/";
     private static final String refPath = "/evis/";
