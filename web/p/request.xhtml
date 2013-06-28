@@ -4,13 +4,23 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     
+    <f:metadata>
+        <f:viewParam name="success"/>
+    </f:metadata>
+    
     <ui:define name="tempTitle">Request</ui:define>
 
     <ui:define name="tempBody">
         <script>
             document.getElementById("request").className += 'active';
         </script>
-        <br/>        
+        <br/>      
+        <h:panelGroup layout="block" id="successMessage" class="alert alert-success span10 offset1" rendered="#{success}">
+              <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('successMessage').style.display = 'none'">
+                ×
+              </button>
+            Your request was sent successfully
+        </h:panelGroup>
         <h:panelGroup layout="block" id="errMessage" class="alert alert-error span10 offset1" rendered="#{facesContext.validationFailed}">
               <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">
                 ×

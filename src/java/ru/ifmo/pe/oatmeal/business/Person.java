@@ -25,6 +25,10 @@ public class Person {
         return userDAO.find(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName()).getName();
     }
     
+    public boolean isAlreadyExist(String login){
+        return userDAO.find(login) != null;
+    }
+    
     public void saveUser(User user){
         userDAO.save(user);
     }

@@ -45,7 +45,7 @@ public class RequestMB {
         this.text = text;
     }
     
-    public void send(){        
+    public String send(){        
         if(handler == 2){        
             ru.ifmo.pe.oatmeal.model.Request r = new ru.ifmo.pe.oatmeal.model.Request();
             String user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
@@ -55,6 +55,7 @@ public class RequestMB {
         } else {
             affair.createAffair(text, person.findLessBusyUser());
         }
+        return "request.xhtml?success=true&faces-redirect=true";
     }
     
     public List<ru.ifmo.pe.oatmeal.model.Request> getRequests(){

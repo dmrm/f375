@@ -24,10 +24,6 @@ public class Affair implements Serializable{
     private User owner;
     @Column(nullable=false, length=1000)
     private String description;
-
-    public Affair() {
-    
-    }
     
     public long getId() {
         return id;

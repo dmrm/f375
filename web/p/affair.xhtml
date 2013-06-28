@@ -7,6 +7,8 @@
     
     <f:metadata>
         <f:viewParam name="id" value="#{affairMB.id}"/>
+        <f:viewParam name="evi" value="#{affairMB.eviId}"/>
+        <f:viewParam name="user" value="#{affairMB.userId}"/>
         <f:event type="preRenderView" listener="#{affairMB.init()}" />
     </f:metadata>
         
@@ -17,6 +19,24 @@
         <script>
             document.getElementById("affair").className += 'active';
         </script>
+        <h:panelGroup layout="block" id="userMessage" class="alert alert-success" rendered="#{not empty affairMB.userId and not empty affairMB.user}">
+                <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('userMessage').style.display = 'none'">
+                   ×
+                </button>
+                Affair was successfully shared with #{affairMB.user.name}
+            </h:panelGroup>
+            <h:panelGroup layout="block" id="eviMessage" class="alert alert-success" rendered="#{not empty affairMB.eviId and affairMB.evi.affair.id == affairMB.id}">
+                <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('eviMessage').style.display = 'none'">
+                   ×
+                </button>
+                Evidence <h:outputLink value="/Oatmeal#{affairMB.evi.eviPath}">##{affairMB.eviId}</h:outputLink> was successfully added
+            </h:panelGroup>
+            <h:panelGroup layout="block" id="errMessage" class="alert alert-error" rendered="#{facesContext.validationFailed}">
+                <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">
+                   ×
+                </button>
+                <h:messages style="margin: 0px 15px"/>
+            </h:panelGroup>
             <div class="container-fluid" style="margin: 40px 0px;">
                 <div class="row-fluid">
                     <div class="span6 offset1">
@@ -40,13 +60,7 @@
                                     <button class="btn btn-primary pull-right" onclick="document.getElementById('eviContainer').style.display = 'block'">Add</button>
                                 </div>                                
                             </div>
-                            <legend></legend>
-                            <h:panelGroup layout="block" id="errMessage" class="alert alert-error" rendered="#{facesContext.validationFailed}">
-                                <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">
-                                   ×
-                                </button>
-                                <h:messages style="margin: 0px 15px"/>
-                            </h:panelGroup>
+                            <legend></legend>                            
                             <div>
                                 <ui:repeat value="#{affairMB.evidences}" var="evi">
                                     <h:outputLink class="span1" value="/Oatmeal#{evi.eviPath}">#{evi.id}</h:outputLink>
@@ -63,7 +77,7 @@
                                     <button onclick="getElementById('usrContainer').style.display = 'block';" class="btn btn-primary pull-right">Add</button>
                                 </div>                                
                             </div>
-                            <legend></legend> 
+                            <legend></legend>                            
                             <div>
                                 <ui:repeat value="#{affairMB.users}" var="user">
                                     #{user.name}<br/>
@@ -76,12 +90,12 @@
                             <h:form>
                                 <br/>
                                 <div class="row-fluid">
-                                    <h:inputTextarea class="span10 offset1" label="Message">
+                                    <h:inputTextarea class="span10 offset1" value="#{messageMB.text}" label="Message">
                                         <f:validateLength minimum="1" maximum="1000"/>
                                     </h:inputTextarea>
                                 </div>
                                 <div class="row-fluid">
-                                    <h:commandButton class="btn span3 offset8" value="Send"/>
+                                    <h:commandButton class="btn span3 offset8" action="#{messageMB.newMessage(affairMB.id)}" value="Send"/>
                                 </div>
                             </h:form>
                         </div>
@@ -89,6 +103,26 @@
                         <div class="decor_block">
                             <h3 style="margin: 0px 10px; font-weight: 100">Messages</h3>
                             <legend></legend>
+                            <ui:repeat value="#{messageMB.getMessages(affairMB.id)}" var="message">
+                                <h:panelGroup layout="block" rendered="#{request.remoteUser == message.user.login}">
+                                    <blockquote class="squared_block" style="background: #eaffff">
+                                        <p>#{message.text}</p>
+                                        <small>#{message.user.name}:<h:outputText value="#{message.dateM}" >
+                                                                                <f:convertDateTime pattern=" dd.MM.yyyy HH:mm" />
+                                                                   </h:outputText>
+                                        </small>
+                                    </blockquote>
+                                </h:panelGroup>
+                                <h:panelGroup layout="block" rendered="#{request.remoteUser != message.user.login}">
+                                    <blockquote class="squared_block" style="background: #ffffde">
+                                        <p>#{message.text}</p>
+                                        <small>#{message.user.name}:<h:outputText value="#{message.dateM}" >
+                                                                                <f:convertDateTime pattern=" dd.MM.yyyy HH:mm" />
+                                                                   </h:outputText>
+                                        </small>
+                                    </blockquote>
+                                </h:panelGroup>
+                            </ui:repeat>
                         </div>
                     </div>
                 </div>
@@ -106,6 +140,7 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <t:inputFileUpload id="file" value="#{evidenceMB.file}" style="display: none" label="File">
+                                                    <f:validateLength minimum="1"/>
                                                     <f:validator validatorId="fileValidator"/>
                                                 </t:inputFileUpload>                        
                                                 <div id="photo" class="input-append">
@@ -160,7 +195,7 @@
                                     </ui:repeat>
                                 </div>
                             </div>
-                            <button class="btn span2 offset1" style="margin-bottom: 10px" onclick="getElementById('usrContainer').style.display = 'none';">Cancel</button>
+                            <h:commandButton class="btn span2 offset1" type="reset" style="margin-bottom: 10px" onclick="getElementById('usrContainer').style.display = 'none';" value="Cancel"/>
                         </h:form>
                     </div>
                 </div>

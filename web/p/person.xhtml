@@ -1,6 +1,7 @@
 <ui:composition template="/WEB-INF/templates/laftemplate.xhtml" 
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
  
     <ui:define name="tempTitle">#{personMB.person}</ui:define>   
@@ -72,6 +73,30 @@
                     <div class="span3 offset1 decor_block">
                         <h3 style="margin: 0px 10px; font-weight: 100">Messages</h3>
                         <legend></legend>
+                        <ui:repeat value="#{messageMB.userRelatedMessages}" var="message">
+                                <h:panelGroup layout="block" rendered="#{request.remoteUser == message.user.login}">
+                                    <h:link class="message-link" outcome="affair.xhtml?id=#{message.affair.id}">
+                                        <blockquote class="squared_block" style="background: #eaffff">
+                                            <p>#{message.text}</p>
+                                            <small>#{message.user.name}: ##{message.affair.id} : <h:outputText value="#{message.dateM}" >
+                                                                                    <f:convertDateTime pattern=" dd.MM.yyyy HH:mm" />
+                                                                       </h:outputText>
+                                            </small>
+                                        </blockquote>
+                                    </h:link>
+                                </h:panelGroup>
+                                <h:panelGroup layout="block" rendered="#{request.remoteUser != message.user.login}">
+                                    <h:link class="message-link" outcome="affair.xhtml?id=#{message.affair.id}">
+                                        <blockquote class="squared_block" style="background: #ffffde">
+                                            <p>#{message.text}</p>
+                                            <small>#{message.user.name} : ##{message.affair.id} : <h:outputText value="#{message.dateM}">
+                                                                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                                                                       </h:outputText>
+                                            </small>
+                                        </blockquote>
+                                    </h:link>
+                                </h:panelGroup>
+                        </ui:repeat>
                     </div>
                 </div>
             </div>

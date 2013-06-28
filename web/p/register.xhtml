@@ -5,6 +5,11 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:t="http://myfaces.apache.org/tomahawk">
     
+    <f:metadata>
+        <f:viewParam name="success"/>
+        <f:viewParam name="failure"/>
+    </f:metadata>
+    
     <ui:define name="tempTitle">Registration</ui:define>
 
     <ui:define name="tempBody">
@@ -12,6 +17,18 @@
             document.getElementById("register").className += 'active';
         </script>
         <br/>
+        <h:panelGroup layout="block" id="successMessage" class="alert alert-success span10 offset1" rendered="#{success}">
+            <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('successMessage').style.display = 'none'">
+              ×
+            </button>
+            User was successfully created
+        </h:panelGroup>
+        <h:panelGroup layout="block" id="failureMessage" class="alert alert-error span10 offset1" rendered="#{failure}">
+            <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('failureMessage').style.display = 'none'">
+              ×
+            </button>
+            User already exists
+        </h:panelGroup>
         <h:panelGroup layout="block" id="errMessage" class="alert alert-error span10 offset1" rendered="#{facesContext.validationFailed}">
             <button class="close" data-dismiss="alert" type="button" onclick="document.getElementById('errMessage').style.display = 'none'">
               ×
@@ -22,7 +39,7 @@
             <div class="control-group">
                 <label class="control-label" for="name">Name</label>
                 <div class="controls">
-                    <h:inputText id="name" value="#{registerMB.name}" label="Name">
+                    <h:inputText id="name" value="#{registerMB.name}" autocomplete="off" label="Name">
                         <f:validateLength minimum="1" maximum="100"/>
                     </h:inputText>
                         
@@ -31,7 +48,7 @@
             <div class="control-group">
                 <label class="control-label" for="login">Login</label>
                 <div class="controls">
-                    <h:inputText id="login" value="#{registerMB.login}" label="Login">
+                    <h:inputText id="login" value="#{registerMB.login}" autocomplete="off" label="Login">
                         <f:validateLength minimum="1" maximum="50"/>
                     </h:inputText>
                 </div>
@@ -39,7 +56,7 @@
             <div class="control-group">
                 <label class="control-label" for="password">Password</label>
                 <div class="controls">
-                    <h:inputSecret id="password" value="#{registerMB.password}" label="Password">
+                    <h:inputSecret id="password" value="#{registerMB.password}" autocomplete="off" label="Password">
                         <f:validateLength minimum="1" maximum="50"/>
                     </h:inputSecret>
                 </div>

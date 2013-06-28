@@ -23,9 +23,14 @@ public class EvidenceDAO {
     @PersistenceContext
     private EntityManager em;
     
-    public void save(Evidence evi){
-        em.persist(evi);
+    public Evidence find(long eviId){
+        return em.find(Evidence.class, eviId);
     }
+    
+    public long save(Evidence evi){
+        em.persist(evi);
+        return evi.getId();
+    }    
     
     public List<Evidence> getEvisByAffair(Affair affair){
         TypedQuery<Evidence> query = em.createQuery("SELECT e FROM Evidence e WHERE e.affair = :affair", Evidence.class);

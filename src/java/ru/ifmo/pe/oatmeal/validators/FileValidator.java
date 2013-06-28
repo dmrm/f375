@@ -23,7 +23,11 @@ public class FileValidator implements Validator{
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-         if (((UploadedFile) value).getSize() > MAX_FILE_SIZE) {
+        UploadedFile file = (UploadedFile)value;
+        if(file == null){
+            throw new ValidatorException(new FacesMessage("Please, specify file path"));
+        }
+         if (file.getSize() > MAX_FILE_SIZE) {
             throw new ValidatorException(new FacesMessage("Upoaded file exceeds size limit"));
         }
     }

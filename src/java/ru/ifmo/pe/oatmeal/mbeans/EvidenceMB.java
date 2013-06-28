@@ -10,9 +10,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 import ru.ifmo.pe.oatmeal.business.Affair;
 
@@ -58,12 +60,13 @@ public class EvidenceMB implements Serializable{
         this.file = file;
     }
     
-    public void loadEvi(long affairId) throws IOException{
+    public String loadEvi(long affairId) throws IOException{        
         String fileName = file.getName();
         String userName = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         byte[] byteFile = file.getBytes();
         path = saveFile(userName, fileName, byteFile);
-        affair.createEvidence(affairId, description, path);
+        long eviId = affair.createEvidence(affairId, description, path);
+        return "affair.xhtml?id=" + affairId + "&evi=" + eviId + "&faces-redirect=true";
     }
     
     private String saveFile(String userName, String fileName, byte[] byteImg) throws IOException{

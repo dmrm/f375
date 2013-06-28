@@ -85,13 +85,17 @@ public class RegisterMB {
         this.file = file;
     }
         
-    public void registerUser() throws IOException{
+    public String registerUser() throws IOException{
+        if(person.isAlreadyExist(login)){
+            return "register.xhtml?failure=true&faces-redirect=true";
+        }
         String fileName = file.getName();
         byte[] byteImg = file.getBytes();
         photo = saveFile(fileName, byteImg);
         List<Group> roleList = new ArrayList<Group>();
         roleList.add(defineRole(role));
         person.saveUser(new User(name, login, password, photo, roleList));
+        return "register.xhtml?success=true&faces-redirect=true";
     }
         
     private String saveFile(String fileName, byte[] byteImg) throws IOException{

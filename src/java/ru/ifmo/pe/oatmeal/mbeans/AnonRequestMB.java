@@ -28,8 +28,9 @@ public class AnonRequestMB {
         this.text = text;
     }
     
-    public void sendAnonymously(){
+    public String sendAnonymously(){
         person.findLessBusyUser();
+        return "anonymous_request.xhtml?success=true&faces-redirect=true";
     }
     
 }

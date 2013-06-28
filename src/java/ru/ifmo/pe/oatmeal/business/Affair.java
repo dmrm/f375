@@ -63,12 +63,12 @@ public class Affair {
         return eviDAO.getEvisByAffair(affairDAO.find(id));
     }
     
-    public void createEvidence(long id, String description, String path){
+    public long createEvidence(long id, String description, String path){
         Evidence evi = new Evidence();
         evi.setAffair(affairDAO.find(id));
         evi.setDescription(description);
         evi.setEviPath(path);
-        eviDAO.save(evi);
+        return eviDAO.save(evi);
     }
     
     public void addUser(long affairId, String login){
@@ -107,5 +107,19 @@ public class Affair {
         }
         return users;
     }  
+    
+    public Evidence evi(long eviId){
+        return eviDAO.find(eviId);
+    }
+//
+//    public User user(long affairId, String user) {
+//        User u = userDAO.find(user);
+//        ru.ifmo.pe.oatmeal.model.Affair a = affairDAO.find(affairId);
+//        return u.;
+//    }
+
+    public User getUser(String userId) {
+        return userDAO.find(userId);
+    }
     
 }
