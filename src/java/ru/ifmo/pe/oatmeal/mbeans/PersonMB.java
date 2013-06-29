@@ -35,10 +35,10 @@ public class PersonMB implements Serializable{
         return person.getPhoto();
     }
        
-    public void logout() throws IOException{
+    public String logout() throws IOException{
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.invalidateSession();
-        ec.redirect("../login.xhtml");
+        return "../login.xhtml?faces-redirect=true";
     }
     
     public String createAffair(){

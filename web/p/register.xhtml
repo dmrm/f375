@@ -42,7 +42,7 @@
                     <h:inputText id="name" value="#{registerMB.name}" autocomplete="off" label="Name">
                         <f:validateLength minimum="1" maximum="100"/>
                     </h:inputText>
-                        
+                    <span class="help-block" style="color: lightgray; margin: 0px;font-size: smaller">at least 1, at most 100 characters</span>    
                 </div>
             </div>
             <div class="control-group">
@@ -51,6 +51,7 @@
                     <h:inputText id="login" value="#{registerMB.login}" autocomplete="off" label="Login">
                         <f:validateLength minimum="1" maximum="50"/>
                     </h:inputText>
+                    <span class="help-block" style="color: lightgray; margin: 0px;font-size: smaller">at least 1, at most 50 characters</span>
                 </div>
             </div>
             <div class="control-group">
@@ -59,6 +60,7 @@
                     <h:inputSecret id="password" value="#{registerMB.password}" autocomplete="off" label="Password">
                         <f:validateLength minimum="1" maximum="50"/>
                     </h:inputSecret>
+                    <span class="help-block" style="color: lightgray; margin: 0px;font-size: smaller">at least 1, at most 50 characters</span>
                 </div>
             </div>
             <div class="control-group">
@@ -69,7 +71,7 @@
                         <f:selectItem itemValue="DETECTIVE" itemLabel="Detective"/>
                         <f:selectItem itemValue="PRIVATE_EYE" itemLabel="Private eye"/>
                         <f:selectItem itemValue="REGISTRAR" itemLabel="Registrar"/>
-                    </h:selectOneMenu>
+                    </h:selectOneMenu>                    
                 </div>
             </div>
             <div class="control-group">
@@ -78,17 +80,18 @@
                     <div class="input-append">
                         <t:inputFileUpload id="file" value="#{registerMB.file}" style="display: none" label="File">
                             <f:validator validatorId="imageValidator"/>
-                        </t:inputFileUpload>                      
+                        </t:inputFileUpload>
                         <div id="photo" class="input-append">
-                            <input id="photoCover" readonly="readonly" class="input-large" type="text"/>
+                           <input id="photoCover" readonly="readonly" class="input-large" type="text"/>
                            <a class="btn" onclick="$('#file').click();">Browse</a>
-                        </div>
+                        </div>                        
                         <script type="text/javascript">
                             $('#file').change(function() {
                                $('#photoCover').val($(this).val());
                             });             
                         </script>
                     </div>
+                    <span class="help-block" style="color: lightgray; margin: 0px;font-size: smaller">max 10MB, *.jpg, *.png, *.gif</span>
                 </div>
             </div>
             <div class="control-group">
